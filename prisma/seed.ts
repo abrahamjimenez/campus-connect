@@ -4,7 +4,7 @@ export async function seedPaymentMethods() {
   await db.paymentMethods.create({
     data: {
       method: ["Credit Card", "PayPal"],
-      userId: "someUserId", // replace with actual user id
+      userId: "65f7b8016acfc0241d813b96"
     },
   });
 }
@@ -22,14 +22,15 @@ export async function seedPost() {
       skills: ["skill1", "skill2"],
       title: "Sample Post",
       updatedAt: new Date(),
-      userId: "someUserId", // replace with actual user id
+      userId: "65f7b8016acfc0241d813b96"
     },
   });
 }
 
 export async function seedUser() {
-    db.user.create({
+    await db.user.create({
         data: {
+            id: "65f7b8016acfc0241d813b96",
             country: "United States",
             email: "jane@email.com",
             firstName: "Jane",
@@ -40,3 +41,11 @@ export async function seedUser() {
         }
     })
 }
+
+async function main() {
+    seedUser()
+    seedPost()
+    seedPaymentMethods()
+}
+
+main()
