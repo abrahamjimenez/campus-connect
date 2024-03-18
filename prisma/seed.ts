@@ -42,10 +42,4 @@ export async function seedUser() {
     })
 }
 
-async function main() {
-    seedUser()
-    seedPost()
-    seedPaymentMethods()
-}
-
-main()
+seedUser()
