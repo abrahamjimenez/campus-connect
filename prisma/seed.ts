@@ -43,3 +43,5 @@ export async function seedUser() {
 }
 
 seedUser()
+seedPost()
+seedPaymentMethods()
