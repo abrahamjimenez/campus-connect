@@ -10,6 +10,9 @@ interface UserProps {
     state: string | null,
 }
 
+/**
+ * @public
+ */
 export async function RegisterUser({firstName, lastName, email, password, state, country, phone}:UserProps) {
     await db.user.create({
         data: {
@@ -24,6 +27,9 @@ export async function RegisterUser({firstName, lastName, email, password, state,
     });
 }
 
+/**
+ * @public
+ */
 export async function LoginUser({email}:UserProps) {
     await db.user.findUnique({
         where: {
@@ -31,3 +37,4 @@ export async function LoginUser({email}:UserProps) {
         }
     })
 }
+
