@@ -23,3 +23,11 @@ export async function RegisterUser({firstName, lastName, email, password, state,
         },
     });
 }
+
+export async function LoginUser({email}:UserProps) {
+    await db.user.findUnique({
+        where: {
+            email,
+        }
+    })
+}
