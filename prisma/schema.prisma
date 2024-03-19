@@ -32,13 +32,13 @@ model Post {
 
 model User {
   id             String           @id @default(auto()) @map("_id") @db.ObjectId
-  country        String
+  country        String?
   email          String
   firstName      String
   lastName       String
   password       String
-  phone          String
-  state          String
+  phone          String?
+  state          String?
   post           Post[]
   paymentMethods PaymentMethods[]
 }
