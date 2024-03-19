@@ -1,6 +1,7 @@
 import {db} from "./db";
 
 interface UserProps {
+    id:string
     country: string | null
     email: string
     firstName: string
@@ -8,6 +9,7 @@ interface UserProps {
     password: string
     phone: string | null,
     state: string | null,
+    paymentMethods: string[]
 }
 
 /**
@@ -38,3 +40,34 @@ export async function LoginUser({email}:UserProps) {
     })
 }
 
+/**
+ * @private
+ */
+export async function UpdateUser({id, firstName, lastName, email, password, state, country, phone, paymentMethods}:UserProps) {
+    await db.user.update({
+        where: {
+            id
+        },
+        data: {
+            firstName,
+            lastName,
+            email,
+            password,
+            state,
+            country,
+            phone,
+            paymentMethods,
+        }
+    })
+}
+
+/**
+ * @private
+ */
+export async function GetUser({id}:UserProps) {
+    await db.user.findUnique({
+        where: {
+            id
+        }
+    })
+}
