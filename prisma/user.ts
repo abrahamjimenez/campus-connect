@@ -13,6 +13,7 @@ interface UserProps {
 }
 
 /**
+ * @description Public
  * @public
  */
 export async function RegisterUser({firstName, lastName, email, password, state, country, phone}:UserProps) {
@@ -30,6 +31,7 @@ export async function RegisterUser({firstName, lastName, email, password, state,
 }
 
 /**
+ * @description Public
  * @public
  */
 export async function LoginUser({email}:UserProps) {
@@ -41,6 +43,7 @@ export async function LoginUser({email}:UserProps) {
 }
 
 /**
+ * @description Private
  * @private
  */
 export async function UpdateUser({id, firstName, lastName, email, password, state, country, phone, paymentMethods}:UserProps) {
@@ -62,12 +65,57 @@ export async function UpdateUser({id, firstName, lastName, email, password, stat
 }
 
 /**
+ * @description Private
  * @private
  */
 export async function GetUser({id}:UserProps) {
     await db.user.findUnique({
         where: {
             id
+        }
+    })
+}
+
+/**
+ * @description Private/Admin
+ * @private
+ */
+export async function GetUsers() {
+    await db.user.findMany()
+}
+
+/**
+ * @description Private/Admin
+ * @private
+ */
+
+export async function DeleteUsers({id}:UserProps) {
+    await db.user.deleteMany({
+        where: {
+            id
+        }
+    })
+}
+
+/**
+ * @description Private/Admin
+ * @private
+ */
+
+export async function UpdateUsers({firstName, lastName, email, password, state, country, phone, paymentMethods}:UserProps) {
+    await db.user.updateMany({
+        where: {
+            email
+        },
+        data: {
+            firstName,
+            lastName,
+            email,
+            password,
+            state,
+            country,
+            phone,
+            paymentMethods,
         }
     })
 }
