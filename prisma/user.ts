@@ -57,13 +57,10 @@ export async function LoginUser({ email, password }: LoginProps) {
       },
     });
 
-    if (user) {
-      console.log("User logged in successfully", user)
-      return user
-    } else {
-      console.log("Invalid email or password", user)
-      return null
+    if (!user) {
+      return
     }
+    return user
   } catch (error) {
     console.error("Error logging in user:", error)
   }
