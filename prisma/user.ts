@@ -1,15 +1,15 @@
 import { db } from "./db";
 
 interface UserProps {
-  id: string;
-  country: string | null;
-  email: string;
+  id?: string;
   firstName: string;
   lastName: string;
+  email: string;
   password: string;
-  phone: string | null;
-  state: string | null;
-  paymentMethods: string[];
+  phone?: string;
+  state?: string;
+  country?: string;
+  paymentMethods?: string[];
 }
 
 /**
@@ -21,9 +21,6 @@ export async function RegisterUser({
   lastName,
   email,
   password,
-  state,
-  country,
-  phone,
 }: UserProps) {
   await db.user.create({
     data: {
@@ -31,9 +28,6 @@ export async function RegisterUser({
       lastName,
       email,
       password,
-      state,
-      country,
-      phone,
     },
   });
 }

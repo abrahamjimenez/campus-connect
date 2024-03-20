@@ -1,8 +1,20 @@
 import React from "react";
 import Image from "next/image";
+import { RegisterUser } from "../../../prisma/user";
+import { redirect } from "next/navigation";
 
 const Page = () => {
-  // TODO Add action to login if email AND password are correct (inside the db)
+  const registerAction = async (formData: FormData) => {
+    "use server";
+
+    await RegisterUser({
+      firstName: formData.get("firstName") as string,
+      lastName: formData.get("lastName") as string,
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+    });
+    redirect("/");
+  };
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -21,7 +33,7 @@ const Page = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" action={registerAction}>
           <div>
             <label
               htmlFor="firstName"
