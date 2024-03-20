@@ -1,11 +1,21 @@
-import React from "react";
+"use client"
+
+import React, {FormEvent} from "react";
 import Image from "next/image";
+import {loginAction} from "@/app/login/actions";
 
 const Page = () => {
-  // TODO Add action to login if email AND password are correct (inside the db)
+  const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    const result = await loginAction(formData)
+    console.log(result)
+  }
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Image
           className="mx-auto h-10 w-auto"
@@ -21,7 +31,7 @@ const Page = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="email"

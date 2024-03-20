@@ -12,6 +12,18 @@ interface UserProps {
   paymentMethods?: string[];
 }
 
+interface RegisterProps {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+interface LoginProps {
+  email: string;
+  password: string;
+}
+
 /**
  * @description Public
  * @public
@@ -21,7 +33,7 @@ export async function RegisterUser({
   lastName,
   email,
   password,
-}: UserProps) {
+}: RegisterProps) {
   await db.user.create({
     data: {
       firstName,
@@ -36,12 +48,25 @@ export async function RegisterUser({
  * @description Public
  * @public
  */
-export async function LoginUser({ email }: UserProps) {
-  await db.user.findUnique({
-    where: {
-      email,
-    },
-  });
+export async function LoginUser({ email, password }: LoginProps) {
+  try {
+    const user = await db.user.findFirst({
+      where: {
+        email,
+        password
+      },
+    });
+
+    if (user) {
+      console.log("User logged in successfully", user)
+      return user
+    } else {
+      console.log("Invalid email or password", user)
+      return null
+    }
+  } catch (error) {
+    console.error("Error logging in user:", error)
+  }
 }
 
 /**
