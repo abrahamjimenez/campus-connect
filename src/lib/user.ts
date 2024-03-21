@@ -56,14 +56,14 @@ export async function RegisterUser({
   }
 }
 
-export async function LoginUser(email:string, password:string) {
+export async function LoginUser(email: string, password: string) {
   const user = await db.user.findUnique({
     where: {
-      email
-    }
-  })
+      email,
+    },
+  });
 
-  if (user && await compare(password, user.passwordHash)) {
-    return user
+  if (user && (await compare(password, user.passwordHash))) {
+    return user;
   }
 }
