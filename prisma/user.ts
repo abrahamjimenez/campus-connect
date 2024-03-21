@@ -1,4 +1,4 @@
-import { compare, hash } from 'bcrypt';
+import { compare, hash } from "bcrypt";
 import { db } from "./db";
 
 interface UserProps {
@@ -35,11 +35,11 @@ export async function RegisterUser({
   email,
   password,
 }: RegisterProps) {
-  const passwordHash = await hash(password, 10)
-  const existingUser = await db.user.findUnique({where: {email}})
+  const passwordHash = await hash(password, 10);
+  const existingUser = await db.user.findUnique({ where: { email } });
 
   if (existingUser) {
-    console.log("Email is already taken")
+    console.log("Email is already taken");
     return;
   }
 
@@ -53,9 +53,8 @@ export async function RegisterUser({
       },
     });
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-
 }
 
 /**
@@ -63,15 +62,15 @@ export async function RegisterUser({
  * @public
  */
 export async function LoginUser({ email, password }: LoginProps) {
-    const user = await db.user.findUnique({
-      where: {
-        email,
-      },
-    });
+  const user = await db.user.findUnique({
+    where: {
+      email,
+    },
+  });
 
-    if (user && await compare(password, user.passwordHash) ) {
-      return user
-    }
+  if (user && (await compare(password, user.passwordHash))) {
+    return user;
+  }
 }
 
 /**
