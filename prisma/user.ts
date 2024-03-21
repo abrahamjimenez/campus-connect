@@ -1,3 +1,4 @@
+import { compare, hash } from 'bcrypt';
 import { db } from "./db";
 
 interface UserProps {
@@ -5,7 +6,7 @@ interface UserProps {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
+  passwordHash: string;
   phone?: string;
   state?: string;
   country?: string;
@@ -34,14 +35,27 @@ export async function RegisterUser({
   email,
   password,
 }: RegisterProps) {
-  await db.user.create({
-    data: {
-      firstName,
-      lastName,
-      email,
-      password,
-    },
-  });
+  const passwordHash = await hash(password, 10)
+  const existingUser = await db.user.findUnique({where: {email}})
+
+  if (existingUser) {
+    console.log("Email is already taken")
+    return;
+  }
+
+  try {
+    return db.user.create({
+      data: {
+        firstName,
+        lastName,
+        email,
+        passwordHash,
+      },
+    });
+  } catch (e) {
+    console.log(e)
+  }
+
 }
 
 /**
@@ -49,21 +63,15 @@ export async function RegisterUser({
  * @public
  */
 export async function LoginUser({ email, password }: LoginProps) {
-  try {
-    const user = await db.user.findFirst({
+    const user = await db.user.findUnique({
       where: {
         email,
-        password
       },
     });
 
-    if (!user) {
-      return
+    if (user && await compare(password, user.passwordHash) ) {
+      return user
     }
-    return user
-  } catch (error) {
-    console.error("Error logging in user:", error)
-  }
 }
 
 /**
@@ -75,7 +83,7 @@ export async function UpdateUser({
   firstName,
   lastName,
   email,
-  password,
+  passwordHash,
   state,
   country,
   phone,
@@ -89,7 +97,7 @@ export async function UpdateUser({
       firstName,
       lastName,
       email,
-      password,
+      passwordHash,
       state,
       country,
       phone,
@@ -140,7 +148,7 @@ export async function UpdateUsers({
   firstName,
   lastName,
   email,
-  password,
+  passwordHash,
   state,
   country,
   phone,
@@ -154,7 +162,7 @@ export async function UpdateUsers({
       firstName,
       lastName,
       email,
-      password,
+      passwordHash,
       state,
       country,
       phone,
