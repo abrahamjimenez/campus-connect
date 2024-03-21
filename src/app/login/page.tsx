@@ -5,14 +5,11 @@ import Image from "next/image";
 import { loginAction } from "@/app/login/actions";
 
 const Page = () => {
-  const [errorMessage, setErrorMessage] = useState<String>("");
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const error = await loginAction(formData);
-    setErrorMessage(error);
+    await loginAction(formData);
   };
 
   return (
@@ -33,8 +30,6 @@ const Page = () => {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>{errorMessage && <p>{errorMessage}</p>}</div>
-
           <div>
             <label
               htmlFor="email"

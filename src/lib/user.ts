@@ -55,3 +55,15 @@ export async function RegisterUser({
     console.log(e);
   }
 }
+
+export async function LoginUser(email:string, password:string) {
+  const user = await db.user.findUnique({
+    where: {
+      email
+    }
+  })
+
+  if (user && await compare(password, user.passwordHash)) {
+    return user
+  }
+}
