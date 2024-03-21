@@ -1,14 +1,5 @@
 import { db } from "./db";
 
-export async function seedPaymentMethods() {
-  await db.paymentMethods.create({
-    data: {
-      method: ["Credit Card", "PayPal"],
-      userId: "65f7b8016acfc0241d813b96",
-    },
-  });
-}
-
 export async function seedPost() {
   await db.post.create({
     data: {
@@ -35,7 +26,7 @@ export async function seedUser() {
       email: "jane@email.com",
       firstName: "Jane",
       lastName: "Doe",
-      password: "jane123",
+      passwordHash: "jane123",
       phone: "098-765-4321",
       state: "United States",
     },
@@ -44,4 +35,3 @@ export async function seedUser() {
 
 seedUser();
 seedPost();
-seedPaymentMethods();
