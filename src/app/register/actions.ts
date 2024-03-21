@@ -1,6 +1,6 @@
 "use server";
 
-import { RegisterUser } from "../../../prisma/user";
+import { RegisterUser } from "@/lib/user";
 
 export async function registerAction(formData: FormData) {
   const user = await RegisterUser({

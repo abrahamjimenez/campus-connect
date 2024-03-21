@@ -1,6 +1,6 @@
 "use server";
 
-import { LoginUser } from "../../../prisma/user";
+import { LoginUser } from "@/lib/user";
 
 export async function loginAction(formData: FormData) {
   const email = formData.get("email") as string;
