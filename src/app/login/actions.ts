@@ -3,6 +3,9 @@
 import { LoginUser } from "@/lib/user";
 import {redirect} from "next/navigation";
 import {cookies} from "next/headers";
+import {SignJWT} from "jose";
+
+const JWT_SECRET= new TextEncoder().encode( "some-random-string")
 
 export async function loginAction(formData: FormData) {
   const email = formData.get("email") as string;
@@ -11,7 +14,10 @@ export async function loginAction(formData: FormData) {
   if (!user) {
     return "Invalid credentials"
   }
-  cookies().set("user", JSON.stringify(user))
+  const sessionToken = await new SignJWT(user)
+      .setProtectedHeader({alg: "HS256"})
+      .sign(JWT_SECRET)
+  cookies().set("sessionToken", sessionToken)
 
   redirect("/")
 }
