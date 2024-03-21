@@ -5,15 +5,12 @@ import Image from "next/image";
 import { registerAction } from "@/app/register/actions";
 
 const Page = () => {
-  const [errorMessage, setErrorMessage] = useState<String>("");
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const error = await registerAction(formData);
-    setErrorMessage(error);
+    await registerAction(formData);
   };
 
   return (
@@ -34,8 +31,6 @@ const Page = () => {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>{errorMessage && <p>{errorMessage}</p>}</div>
-
           <div>
             <label
               htmlFor="firstName"
