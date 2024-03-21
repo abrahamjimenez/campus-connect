@@ -2,6 +2,7 @@
 
 import { LoginUser } from "@/lib/user";
 import {redirect} from "next/navigation";
+import {cookies} from "next/headers";
 
 export async function loginAction(formData: FormData) {
   const email = formData.get("email") as string;
@@ -10,6 +11,7 @@ export async function loginAction(formData: FormData) {
   if (!user) {
     return "Invalid credentials"
   }
+  cookies().set("user", JSON.stringify(user))
 
   redirect("/")
 }
