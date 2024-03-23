@@ -1,13 +1,10 @@
 "use client";
 
-import React, { FormEvent } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import React from "react";
+import { useFormStatus } from "react-dom";
 import Image from "next/image";
-import { loginAction } from "@/app/login/actions";
 
 const Page = () => {
-  const [error, action] = useFormState(loginAction, null)
-
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -25,10 +22,7 @@ const Page = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action={action} noValidate>
-          {error && (
-              <p>{error.message}</p>
-          )}
+        <form className="space-y-6">
           <div>
             <label
               htmlFor="email"
@@ -97,16 +91,16 @@ const Page = () => {
 };
 
 function SubmitButton() {
-  const {pending} = useFormStatus()
+  const { pending } = useFormStatus();
   return (
-      <button
-          type="submit"
-          className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-slate-500 disabled:cursor-not-allowed"
-          disabled={pending}
-      >
-        Sign in
-      </button>
-  )
+    <button
+      type="submit"
+      className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-slate-500 disabled:cursor-not-allowed"
+      disabled={pending}
+    >
+      Sign in
+    </button>
+  );
 }
 
 export default Page;

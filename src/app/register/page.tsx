@@ -1,18 +1,9 @@
 "use client";
 
-import React, { FormEvent, useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { registerAction } from "@/app/register/actions";
 
 const Page = () => {
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    await registerAction(formData);
-  };
-
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -30,7 +21,7 @@ const Page = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={handleSubmit}>
+        <form className="space-y-6">
           <div>
             <label
               htmlFor="firstName"
