@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Campus Connect",
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <header></header>
+        <header>
+          <Header />
+        </header>
         <main>{children}</main>
         <footer></footer>
       </body>
