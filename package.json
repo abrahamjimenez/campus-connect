@@ -11,7 +11,7 @@
     "prettier": "prettier prisma src --write"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx src/lib/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.11.0",
