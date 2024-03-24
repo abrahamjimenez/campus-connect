@@ -1,16 +1,16 @@
 "use client";
 
-import React, {FormEvent} from "react";
-import {loginAction} from "@/app/login/actions";
+import React, { FormEvent } from "react";
+import { loginAction } from "@/app/login/actions";
 
 const Page = () => {
-    const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-        const form = e.currentTarget;
-        const formData = new FormData(form)
-        await loginAction(formData)
-    }
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    await loginAction(formData);
+  };
 
   return (
     <form onSubmit={submitHandler}>
