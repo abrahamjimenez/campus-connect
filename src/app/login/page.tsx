@@ -1,10 +1,19 @@
 "use client";
 
-import React from "react";
+import React, {FormEvent} from "react";
+import {loginAction} from "@/app/login/actions";
 
 const Page = () => {
+    const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        const form = e.currentTarget;
+        const formData = new FormData(form)
+        await loginAction(formData)
+    }
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <label htmlFor="email">Email address</label>
       <input
         id="email"
