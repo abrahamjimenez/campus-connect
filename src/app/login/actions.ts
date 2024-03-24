@@ -19,6 +19,8 @@ export async function loginAction(formData: FormData) {
   };
 
   const user = await LoginUser(data)
-  console.log("loginAction:", user)
-  cookies().set("user", JSON.stringify(user))
+  const sessionToken  = await new SignJWT(user)
+      .setProtectedHeader({alg: "HS256"})
+      .sign(JWT_SECRET)
+  cookies().set("sessionToken", sessionToken)
 }
