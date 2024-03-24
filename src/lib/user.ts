@@ -63,6 +63,7 @@ export async function LoginUser({email, password}: {email:string, password:strin
     },
   });
 
-  console.log(user);
-  return user
+  if (user && (await compare(password, user.passwordHash))) {
+    return user;
+  }
 }
