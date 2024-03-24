@@ -12,7 +12,6 @@ interface Data {
 
 const JWT_SECRET = new TextEncoder().encode("some-random-string");
 
-// todo: update any state to whatever it is
 export async function loginAction(formData: FormData) {
   const data: Data = {
     email: formData.get("email") as string,
@@ -21,4 +20,5 @@ export async function loginAction(formData: FormData) {
 
   const user = await LoginUser(data)
   console.log("loginAction:", user)
+  cookies().set("user", JSON.stringify(user))
 }
