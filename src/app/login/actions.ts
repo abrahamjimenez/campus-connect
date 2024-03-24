@@ -1,7 +1,7 @@
 "use server";
 
 import { LoginUser } from "@/lib/user";
-import {setSessionCookie} from "@/lib/auth";
+import { setSessionCookie } from "@/lib/auth";
 
 interface Data {
   email: string;
@@ -16,6 +16,6 @@ export async function loginAction(formData: FormData) {
     password: formData.get("password") as string,
   };
 
-  const  user = await LoginUser(data);
-  await setSessionCookie(user)
+  const user = await LoginUser(data);
+  await setSessionCookie(user);
 }

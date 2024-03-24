@@ -1,5 +1,5 @@
 import React from "react";
-import {getUserFromSession} from "@/lib/auth";
+import { getUserFromSession } from "@/lib/auth";
 
 const Header = async () => {
   const user = await getUserFromSession();
