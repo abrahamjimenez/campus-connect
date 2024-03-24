@@ -1,20 +1,5 @@
 import React from "react";
-import { cookies } from "next/headers";
-import { jwtVerify } from "jose";
-
-const JWT_SECRET = new TextEncoder().encode("some-random-string");
-
-const getUserFromSession = async () => {
-  const sessionTokenCookie = cookies().get("sessionToken");
-  try {
-    if (sessionTokenCookie) {
-      const { payload } = await jwtVerify(sessionTokenCookie.value, JWT_SECRET);
-      return payload;
-    }
-  } catch (e) {
-    console.warn("Invalid JWT", e);
-  }
-};
+import {getUserFromSession} from "@/lib/auth";
 
 const Header = async () => {
   const user = await getUserFromSession();
