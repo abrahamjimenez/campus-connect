@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { getUserFromSession } from "@/lib/auth";
 import SignOutButton from "@/components/SignOutButton";
 
@@ -6,13 +7,24 @@ const Header = async () => {
   const user = await getUserFromSession();
 
   return (
-    <div>
-      <ul>
-        <li>Home</li>
-        <li>About</li>
-        {user ? <SignOutButton /> : <li>Log in</li>}
+    <nav className="bg-yellow-500">
+      <ul className="flex justify-around">
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/">About</Link>
+        </li>
+        {user ? (
+          <SignOutButton />
+        ) : (
+          <div className="flex flex-col">
+            <Link href="/login">Log in</Link>
+            <Link href="/register">Sign up</Link>
+          </div>
+        )}
       </ul>
-    </div>
+    </nav>
   );
 };
 
