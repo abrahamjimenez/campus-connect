@@ -3,6 +3,8 @@
 import React, {FormEvent} from "react";
 import { jobAction } from "@/app/jobs/action";
 import { TagsInput } from "@mantine/core";
+import { FilePond, registerPlugin } from 'react-filepond';
+import 'filepond/dist/filepond.min.css';
 
 const Page = () => {
 
@@ -26,10 +28,11 @@ const Page = () => {
       <label htmlFor="price">Price</label>
       <input type="number" name="price" id="price" />
 
+      {/*  todo: calendar from mantine.dev?*/}
       <label htmlFor="date">Due date</label>
       <input type="date" name="date" id="date" />
 
-        {/*Dropzone*/}
+        <FilePond allowMultiple={true} maxFiles={3} server="/api" credits={false} />
 
         <div>
             <p>School year</p>
