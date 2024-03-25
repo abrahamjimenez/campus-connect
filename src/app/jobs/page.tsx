@@ -1,10 +1,16 @@
 "use client";
 
-import React, { FormEvent } from "react";
+import React, {FormEvent, useCallback} from "react";
 import { jobAction } from "@/app/jobs/action";
 import { TagsInput } from "@mantine/core";
+import {useDropzone} from "react-dropzone";
 
 const Page = () => {
+    const onDrop = useCallback(acceptedFiles => {
+        console.log("acceptedFiles", acceptedFiles)
+    }, [])
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -27,18 +33,24 @@ const Page = () => {
       <label htmlFor="date">Due date</label>
       <input type="date" name="date" id="date" />
 
-      <label htmlFor="image">Images</label>
-      <input type="text" name="image" id="image" />
+        <div {...getRootProps()}>
+            <input {...getInputProps()} />
+            {
+                isDragActive ?
+                    <p>Drop the files here ...</p> :
+                    <p>Drag n drop some files here, or click to select files</p>
+            }
+        </div>
 
-      <div>
-        <p>School year</p>
+        <div>
+            <p>School year</p>
 
-        <input type="checkbox" id="freshman" name="freshman" value="Freshman" />
-        <label htmlFor="freshman"> Freshman</label>
-        <br />
+            <input type="checkbox" id="freshman" name="freshman" value="Freshman"/>
+            <label htmlFor="freshman"> Freshman</label>
+            <br/>
 
-        <input
-          type="checkbox"
+            <input
+                type="checkbox"
           id="sophomore"
           name="sophomore"
           value="Sophomore"
