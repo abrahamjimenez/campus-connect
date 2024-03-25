@@ -1,17 +1,13 @@
 "use client";
 
-import React, {FormEvent, useCallback} from "react";
+import React, {FormEvent} from "react";
 import { jobAction } from "@/app/jobs/action";
 import { TagsInput } from "@mantine/core";
-import {useDropzone} from "react-dropzone";
 
 const Page = () => {
-    const onDrop = useCallback(acceptedFiles => {
-        console.log("acceptedFiles", acceptedFiles)
-    }, [])
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
-  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+
+    const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -33,14 +29,7 @@ const Page = () => {
       <label htmlFor="date">Due date</label>
       <input type="date" name="date" id="date" />
 
-        <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            {
-                isDragActive ?
-                    <p>Drop the files here ...</p> :
-                    <p>Drag n drop some files here, or click to select files</p>
-            }
-        </div>
+        {/*Dropzone*/}
 
         <div>
             <p>School year</p>
