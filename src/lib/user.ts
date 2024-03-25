@@ -1,26 +1,9 @@
 import { compare, hash } from "bcrypt";
 import { db } from "./db";
 
-interface UserProps {
-  id?: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  passwordHash: string;
-  phone?: string;
-  state?: string;
-  country?: string;
-  paymentMethods?: string[];
-}
-
 interface RegisterProps {
   firstName: string;
   lastName: string;
-  email: string;
-  password: string;
-}
-
-interface LoginProps {
   email: string;
   password: string;
 }

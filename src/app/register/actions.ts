@@ -13,11 +13,15 @@ export async function registerAction(formData: FormData) {
   };
 
   const user = await RegisterUser(data);
-  // await setSessionCookie(user.firstName, user.email)
   if (user.isError) {
     // console.log(user)
     return user.message;
   }
-  console.log("registerAction:", user);
+  const userData = {
+    firstName: user.firstName,
+    email: user.email,
+  };
+  await setSessionCookie(userData);
+  // console.log("registerAction:", user);
   redirect("/");
 }
