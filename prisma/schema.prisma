@@ -7,20 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt   DateTime @db.Date
+model Job {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime  @db.Date
   description String
-  dueDate     DateTime @db.Date
-  free        Boolean
+  dueDate     DateTime? @db.Date
   images      String[]
-  price       Int
+  price       Int       @default(0)
   schoolYear  String[]
   skills      String[]
   title       String
-  updatedAt   DateTime @db.Date
-  userId      String   @db.ObjectId
-  User        User     @relation(fields: [userId], references: [id])
+  updatedAt   DateTime  @db.Date
+  userId      String    @db.ObjectId
+  User        User      @relation(fields: [userId], references: [id])
 }
 
 model User {
@@ -33,5 +32,5 @@ model User {
   phone          String?
   state          String?
   paymentMethods String[]
-  post           Post[]
+  post           Job[]
 }

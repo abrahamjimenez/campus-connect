@@ -1,12 +1,11 @@
 import { db } from "./db";
 
 export async function seedPost() {
-  await db.post.create({
+  await db.job.create({
     data: {
       createdAt: new Date(),
       description: "This is a sample post",
       dueDate: new Date(),
-      free: true,
       images: ["image1.jpg", "image2.jpg"],
       price: 100,
       schoolYear: ["2022", "2023"],
