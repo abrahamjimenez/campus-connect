@@ -2,6 +2,8 @@ import React from "react";
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
+import "@mantine/core/styles.css";
+import { MantineProvider } from "@mantine/core";
 
 export const metadata: Metadata = {
   title: "Campus Connect",
@@ -19,7 +21,9 @@ export default function RootLayout({
         <header>
           <Header />
         </header>
-        <main>{children}</main>
+        <main>
+          <MantineProvider>{children}</MantineProvider>
+        </main>
         <footer></footer>
       </body>
     </html>
