@@ -12,16 +12,20 @@ export async function registerAction(formData: FormData) {
     password: formData.get("password") as string,
   };
 
-  const user = await RegisterUser(data);
-  if (user.isError) {
-    // console.log(user)
-    return user.message;
+  //  someone will need to fix this typescript type in the future.
+  const user: any = await RegisterUser(data);
+
+  if (user) {
+    if (user.isError) {
+      // console.log(user)
+      return user.message;
+    }
+    const userData = {
+      firstName: user.firstName,
+      email: user.email,
+    };
+    await setSessionCookie(userData);
+    // console.log("registerAction:", user);
+    redirect("/");
   }
-  const userData = {
-    firstName: user.firstName,
-    email: user.email,
-  };
-  await setSessionCookie(userData);
-  // console.log("registerAction:", user);
-  redirect("/");
 }

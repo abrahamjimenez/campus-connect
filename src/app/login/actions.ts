@@ -8,8 +8,6 @@ interface Data {
   password: string;
 }
 
-const JWT_SECRET = new TextEncoder().encode("some-random-string");
-
 export async function loginAction(formData: FormData) {
   const data: Data = {
     email: formData.get("email") as string,
@@ -17,5 +15,7 @@ export async function loginAction(formData: FormData) {
   };
 
   const user = await LoginUser(data);
-  await setSessionCookie(user);
+  if (user) {
+    await setSessionCookie(user);
+  }
 }
