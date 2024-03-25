@@ -1,26 +1,9 @@
 import { compare, hash } from "bcrypt";
 import { db } from "./db";
 
-interface UserProps {
-  id?: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  passwordHash: string;
-  phone?: string;
-  state?: string;
-  country?: string;
-  paymentMethods?: string[];
-}
-
 interface RegisterProps {
   firstName: string;
   lastName: string;
-  email: string;
-  password: string;
-}
-
-interface LoginProps {
   email: string;
   password: string;
 }
@@ -39,7 +22,8 @@ export async function RegisterUser({
   const existingUser = await db.user.findUnique({ where: { email } });
 
   if (existingUser) {
-    return;
+    // Code runs if email is in use
+    return { isError: true, message: "Email is in use" };
   }
 
   try {
@@ -56,7 +40,13 @@ export async function RegisterUser({
   }
 }
 
-export async function LoginUser({email, password}: {email:string, password:string}) {
+export async function LoginUser({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
   const user = await db.user.findUnique({
     where: {
       email,
@@ -64,6 +54,6 @@ export async function LoginUser({email, password}: {email:string, password:strin
   });
 
   if (user && (await compare(password, user.passwordHash))) {
-    return user;
+    return { firstName: user.firstName, email: user.email };
   }
 }
