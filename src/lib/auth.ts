@@ -11,11 +11,15 @@ const JWT_COOKIE = "sessionToken";
 const JWT_DURATION = ms("4 weeks");
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET);
 
+export const deleteSessionCookie = () => {
+  cookies().delete(JWT_COOKIE);
+};
+
 export const getUserFromSession = async () => {
-  const sessionTokenCookie = cookies().get(JWT_COOKIE);
+  const sessionToken = cookies().get(JWT_COOKIE)?.value;
   try {
-    if (sessionTokenCookie) {
-      const { payload } = await jwtVerify(sessionTokenCookie.value, JWT_SECRET);
+    if (sessionToken) {
+      const { payload } = await jwtVerify(sessionToken, JWT_SECRET);
       return payload;
     }
   } catch (e) {

@@ -1,5 +1,6 @@
 import React from "react";
 import { getUserFromSession } from "@/lib/auth";
+import SignOutButton from "@/components/SignOutButton";
 
 const Header = async () => {
   const user = await getUserFromSession();
@@ -9,7 +10,7 @@ const Header = async () => {
       <ul>
         <li>Home</li>
         <li>About</li>
-        {user ? <li>{user.email as string}</li> : <li>Log in</li>}
+        {user ? <SignOutButton /> : <li>Log in</li>}
       </ul>
     </div>
   );
