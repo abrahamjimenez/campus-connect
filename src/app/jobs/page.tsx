@@ -1,15 +1,13 @@
 "use client";
 
-import React, {FormEvent} from "react";
+import React, { FormEvent } from "react";
 import { jobAction } from "@/app/jobs/action";
 import { TagsInput } from "@mantine/core";
-import { FilePond, registerPlugin } from 'react-filepond';
-import 'filepond/dist/filepond.min.css';
+import { FilePond } from "react-filepond";
+import "filepond/dist/filepond.min.css";
 
 const Page = () => {
-
-
-    const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -32,17 +30,22 @@ const Page = () => {
       <label htmlFor="date">Due date</label>
       <input type="date" name="date" id="date" />
 
-        <FilePond allowMultiple={true} maxFiles={3} server="/api" credits={false} />
+      <FilePond
+        allowMultiple={true}
+        maxFiles={3}
+        server="/api"
+        credits={false}
+      />
 
-        <div>
-            <p>School year</p>
+      <div>
+        <p>School year</p>
 
-            <input type="checkbox" id="freshman" name="freshman" value="Freshman"/>
-            <label htmlFor="freshman"> Freshman</label>
-            <br/>
+        <input type="checkbox" id="freshman" name="freshman" value="Freshman" />
+        <label htmlFor="freshman"> Freshman</label>
+        <br />
 
-            <input
-                type="checkbox"
+        <input
+          type="checkbox"
           id="sophomore"
           name="sophomore"
           value="Sophomore"
