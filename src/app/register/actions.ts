@@ -2,6 +2,7 @@
 
 import { RegisterUser } from "@/lib/user";
 import { redirect } from "next/navigation";
+import { setSessionCookie } from "@/lib/auth";
 
 export async function registerAction(formData: FormData) {
   const data = {
@@ -12,6 +13,11 @@ export async function registerAction(formData: FormData) {
   };
 
   const user = await RegisterUser(data);
+  // await setSessionCookie(user.firstName, user.email)
+  if (user.isError) {
+    // console.log(user)
+    return user.message;
+  }
   console.log("registerAction:", user);
   redirect("/");
 }

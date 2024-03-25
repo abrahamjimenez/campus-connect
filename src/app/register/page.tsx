@@ -1,19 +1,24 @@
 "use client";
 
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import { registerAction } from "@/app/register/actions";
 
 const Page = () => {
+  const [errorMessage, setErrorMessage] = useState();
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    await registerAction(formData);
+    const error = await registerAction(formData);
+    setErrorMessage(error);
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      {errorMessage && <p className="text-red-600">{errorMessage}</p>}
+
       <label htmlFor="firstName">First name</label>
       <input
         id="firstName"

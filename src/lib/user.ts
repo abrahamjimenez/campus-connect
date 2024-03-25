@@ -39,7 +39,8 @@ export async function RegisterUser({
   const existingUser = await db.user.findUnique({ where: { email } });
 
   if (existingUser) {
-    return;
+    // Code runs if email is in use
+    return { isError: true, message: "Email is in use" };
   }
 
   try {
