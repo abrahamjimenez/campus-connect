@@ -16,10 +16,10 @@ const JobForm = () => {
   return (
     <form onSubmit={submitHandler} className="flex flex-col">
       <label htmlFor="title">Title</label>
-      <input type="text" name="title" id="title" />
+      <input type="text" name="title" id="title" required />
 
       <label htmlFor="description">Description</label>
-      <input type="text" name="description" id="description" />
+      <input type="text" name="description" id="description" required />
 
       <label htmlFor="price">Price</label>
       <input type="number" name="price" id="price" />
