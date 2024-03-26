@@ -3,8 +3,6 @@
 import React, { FormEvent } from "react";
 import { jobAction } from "@/app/jobs/action";
 import { TagsInput } from "@mantine/core";
-import { FilePond } from "react-filepond";
-import "filepond/dist/filepond.min.css";
 
 const Page = () => {
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
@@ -29,13 +27,6 @@ const Page = () => {
       {/*  todo: calendar from mantine.dev?*/}
       <label htmlFor="date">Due date</label>
       <input type="date" name="date" id="date" />
-
-      <FilePond
-        allowMultiple={true}
-        maxFiles={3}
-        server="/api"
-        credits={false}
-      />
 
       <div>
         <p>School year</p>

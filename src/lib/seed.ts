@@ -6,7 +6,6 @@ export async function seedPost() {
       createdAt: new Date(),
       description: "This is a sample post",
       dueDate: new Date(),
-      images: ["image1.jpg", "image2.jpg"],
       price: 100,
       schoolYear: ["2022", "2023"],
       skills: ["skill1", "skill2"],

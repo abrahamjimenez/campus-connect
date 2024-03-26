@@ -12,7 +12,6 @@ model Job {
   createdAt   DateTime  @db.Date
   description String
   dueDate     DateTime? @db.Date
-  images      String[]
   price       Int       @default(0)
   schoolYear  String[]
   skills      String[]

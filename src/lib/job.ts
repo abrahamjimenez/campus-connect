@@ -6,7 +6,6 @@ interface Job {
   description: string;
   price: number;
   dueDate: Date;
-  images: string[];
   schoolYear: string[];
   skills: string[];
 }
@@ -17,7 +16,6 @@ export async function CreateJob({
   description,
   price,
   dueDate,
-  images,
   schoolYear,
   skills,
 }: Job) {
@@ -28,7 +26,6 @@ export async function CreateJob({
       description,
       price,
       dueDate,
-      images,
       schoolYear,
       skills,
       createdAt: new Date().toISOString(),
