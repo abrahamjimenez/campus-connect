@@ -9,7 +9,7 @@ const Page = async () => {
   return (
     <>
       {user ? (
-        <JobForm />
+        <JobForm userId={user.userId as string} />
       ) : (
         <div>
           <p>

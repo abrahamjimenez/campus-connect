@@ -4,7 +4,7 @@ import React, { FormEvent } from "react";
 import { TagsInput } from "@mantine/core";
 import { jobAction } from "@/app/jobs/action";
 
-const JobForm = () => {
+const JobForm = ({ userId }: { userId: string }) => {
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -15,6 +15,8 @@ const JobForm = () => {
 
   return (
     <form onSubmit={submitHandler} className="flex flex-col">
+      <input type="hidden" name="userId" value={userId} />
+
       <label htmlFor="title">Title</label>
       <input type="text" name="title" id="title" required />
 

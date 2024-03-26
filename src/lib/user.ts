@@ -54,6 +54,6 @@ export async function LoginUser({
   });
 
   if (user && (await compare(password, user.passwordHash))) {
-    return { firstName: user.firstName, email: user.email };
+    return { firstName: user.firstName, email: user.email, userId: user.id };
   }
 }
