@@ -5,6 +5,11 @@ import { TagsInput } from "@mantine/core";
 import { jobAction } from "@/app/jobs/action";
 
 const JobForm = ({ userId }: { userId: string }) => {
+  const minDate = new Date().toISOString().slice(0, 10);
+  const maxDate = new Date(new Date().setFullYear(new Date().getFullYear() + 5))
+    .toISOString()
+    .slice(0, 10);
+
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -27,7 +32,7 @@ const JobForm = ({ userId }: { userId: string }) => {
       <input type="number" name="price" id="price" />
 
       <label htmlFor="date">Due date</label>
-      <input type="date" name="date" id="date" />
+      <input type="date" name="date" id="date" min={minDate} max={maxDate} />
 
       <div>
         <p>School year</p>
