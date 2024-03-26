@@ -2,6 +2,7 @@
 
 import { LoginUser } from "@/lib/user";
 import { setSessionCookie } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 interface Data {
   email: string;
@@ -17,5 +18,6 @@ export async function loginAction(formData: FormData) {
   const user = await LoginUser(data);
   if (user) {
     await setSessionCookie(user);
+    redirect("/");
   }
 }
