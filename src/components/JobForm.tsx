@@ -2,7 +2,7 @@
 
 import React, { FormEvent } from "react";
 import { TagsInput } from "@mantine/core";
-import { jobAction } from "@/app/jobs/action";
+import { jobAction } from "@/app/create-job/action";
 
 const JobForm = ({ userId }: { userId: string }) => {
   const minDate = new Date().toISOString().slice(0, 10);
