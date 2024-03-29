@@ -3,18 +3,21 @@
 import React, { FormEvent } from "react";
 import { TagsInput } from "@mantine/core";
 import { jobAction } from "@/app/create-job/action";
+import { Calendar } from "@/components/ui/calendar";
 
 const JobForm = ({ userId }: { userId: string }) => {
-  const minDate = new Date().toISOString().slice(0, 10);
-  const maxDate = new Date(new Date().setFullYear(new Date().getFullYear() + 5))
-    .toISOString()
-    .slice(0, 10);
+  const [date, setDate] = React.useState<Date | undefined>(new Date());
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = new FormData(form);
+
+    if (date) {
+      formData.append("date", date.toISOString());
+    }
+
     await jobAction(formData);
   };
 
@@ -31,8 +34,12 @@ const JobForm = ({ userId }: { userId: string }) => {
       <label htmlFor="price">Price</label>
       <input type="number" name="price" id="price" />
 
-      <label htmlFor="date">Due date</label>
-      <input type="date" name="date" id="date" min={minDate} max={maxDate} />
+      <Calendar
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        className="rounded-md border"
+      />
 
       <div>
         <p>School year</p>
