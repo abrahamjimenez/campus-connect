@@ -1,6 +1,11 @@
 "use server";
 
-import { FindUser, UpdateUserFirstName, UpdateUserLastName } from "@/lib/user";
+import {
+  FindUser,
+  UpdateUserEmail,
+  UpdateUserFirstName,
+  UpdateUserLastName,
+} from "@/lib/user";
 import { setSessionCookie } from "@/lib/auth";
 
 export async function firstNameAction(formData: FormData) {
@@ -19,6 +24,16 @@ export async function lastNameAction(formData: FormData) {
 
   await FindUser(userId);
   const data: any = await UpdateUserLastName(userId, lastName);
+
+  await setSessionCookie(data);
+}
+
+export async function emailAction(formData: FormData) {
+  const email = formData.get("email") as string;
+  const userId = formData.get("userId") as string;
+
+  await FindUser(userId);
+  const data: any = await UpdateUserEmail(userId, email);
 
   await setSessionCookie(data);
 }
