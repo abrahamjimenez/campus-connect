@@ -14,11 +14,11 @@ export async function firstNameAction(formData: FormData) {
 }
 
 export async function lastNameAction(formData: FormData) {
-  const firstName = formData.get("lastName") as string;
+  const lastName = formData.get("lastName") as string;
   const userId = formData.get("userId") as string;
 
   await FindUser(userId);
-  const data: any = await UpdateUserLastName(userId, firstName);
+  const data: any = await UpdateUserLastName(userId, lastName);
 
   await setSessionCookie(data);
 }
