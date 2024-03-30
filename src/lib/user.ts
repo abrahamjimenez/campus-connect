@@ -254,3 +254,34 @@ export async function UpdateUserState(userId: string, state: string) {
     };
   }
 }
+export async function UpdateUserPhone(userId: string, phone: string) {
+  const user = await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      phone,
+    },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      country: true,
+      state: true,
+      phone: true,
+    },
+  });
+
+  if (user) {
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
+  }
+}

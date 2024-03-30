@@ -6,6 +6,7 @@ import {
   emailAction,
   firstNameAction,
   lastNameAction,
+  phoneAction,
   stateAction,
 } from "@/app/profile/action";
 import { JWTPayload } from "jose";
@@ -56,6 +57,15 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     await stateAction(formData);
   };
 
+  const handlePhoneSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await phoneAction(formData);
+  };
+
   return (
     <div>
       <form onSubmit={handleFirstNameSubmit}>
@@ -68,7 +78,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
           defaultValue={user.firstName as string}
         />
         <input
-          type="text"
+          type="hidden"
           hidden
           defaultValue={user.userId as string}
           name="userId"
@@ -86,7 +96,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
           defaultValue={user.lastName as string}
         />
         <input
-          type="text"
+          type="hidden"
           hidden
           defaultValue={user.userId as string}
           name="userId"
@@ -104,7 +114,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
           defaultValue={user.email as string}
         />
         <input
-          type="text"
+          type="hidden"
           hidden
           defaultValue={user.userId as string}
           name="userId"
@@ -129,7 +139,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
           defaultValue={user.country as string}
         />
         <input
-          type="text"
+          type="hidden"
           hidden
           defaultValue={user.userId as string}
           name="userId"
@@ -147,7 +157,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
           defaultValue={user.state as string}
         />
         <input
-          type="text"
+          type="hidden"
           hidden
           defaultValue={user.userId as string}
           name="userId"
@@ -155,10 +165,21 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form action="">
+      <form onSubmit={handlePhoneSubmit}>
         <label htmlFor="phone">Phone: </label>
         <br />
-        <input id="phone" name="phone" type="tel" />
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          defaultValue={user.phone as string}
+        />
+        <input
+          type="hidden"
+          hidden
+          defaultValue={user.userId as string}
+          name="userId"
+        />
         <button type="submit">Update</button>
       </form>
     </div>
