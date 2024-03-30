@@ -12,49 +12,61 @@ const Page = async () => {
           <form action="">
             <label htmlFor="firstName">First Name: </label>
             <br />
-            <input type="text" defaultValue={user.firstName as string} />
+            <input
+              id="firstName"
+              type="text"
+              defaultValue={user.firstName as string}
+            />
             <button type="submit">Update</button>
           </form>
 
           <form action="">
             <label htmlFor="lastName">Last Name: </label>
             <br />
-            <input type="text" defaultValue={user.lastName as string} />
+            <input
+              id="lastName"
+              type="text"
+              defaultValue={user.lastName as string}
+            />
             <button type="submit">Update</button>
           </form>
 
           <form action="">
             <label htmlFor="email">Email: </label>
             <br />
-            <input type="email" defaultValue={user.email as string} />
+            <input
+              id="email"
+              type="email"
+              defaultValue={user.email as string}
+            />
             <button type="submit">Update</button>
           </form>
 
           <form action="">
             <label htmlFor="password">Password: </label>
             <br />
-            <input type="password" />
+            <input id="password" type="password" />
             <button type="submit">Update</button>
           </form>
 
           <form action="">
             <label htmlFor="country">Country: </label>
             <br />
-            <input type="text" />
+            <input id="country" type="text" />
             <button type="submit">Update</button>
           </form>
 
           <form action="">
             <label htmlFor="state">State: </label>
             <br />
-            <input type="text" />
+            <input id="state" type="text" />
             <button type="submit">Update</button>
           </form>
 
           <form action="">
             <label htmlFor="phone">Phone: </label>
             <br />
-            <input type="tel" />
+            <input id="phone" type="tel" />
             <button type="submit">Update</button>
           </form>
         </div>
