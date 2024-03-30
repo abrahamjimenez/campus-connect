@@ -1,5 +1,5 @@
-import { compare, hash } from "bcrypt";
-import { db } from "./db";
+import {compare, hash} from "bcrypt";
+import {db} from "./db";
 
 interface RegisterProps {
   firstName: string;
@@ -41,9 +41,9 @@ export async function RegisterUser({
 }
 
 export async function LoginUser({
-  email,
-  password,
-}: {
+                                  email,
+                                  password,
+                                }: {
   email: string;
   password: string;
 }) {
@@ -66,6 +66,23 @@ export async function LoginUser({
   }
 }
 
+export async function FindUser(userId:string) {
+  return db.user.findUnique({
+    where: {
+      id: userId
+    },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      country: true,
+      state: true,
+      phone: true
+    }
+  })
+}
+
 export async function UpdateUserFirstName(userId: string, firstName: string) {
   return db.user.update({
     where: {
@@ -74,5 +91,14 @@ export async function UpdateUserFirstName(userId: string, firstName: string) {
     data: {
       firstName,
     },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      country: true,
+      state: true,
+      phone: true
+    }
   });
 }
