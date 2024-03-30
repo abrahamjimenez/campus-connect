@@ -6,6 +6,7 @@ import {
   emailAction,
   firstNameAction,
   lastNameAction,
+  stateAction,
 } from "@/app/profile/action";
 import { JWTPayload } from "jose";
 
@@ -44,6 +45,15 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     const formData = new FormData(form);
 
     await countryAction(formData);
+  };
+
+  const handleStateSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await stateAction(formData);
   };
 
   return (
@@ -127,10 +137,21 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form action="">
+      <form onSubmit={handleStateSubmit}>
         <label htmlFor="state">State: </label>
         <br />
-        <input id="state" name="state" type="text" />
+        <input
+          id="state"
+          name="state"
+          type="text"
+          defaultValue={user.state as string}
+        />
+        <input
+          type="text"
+          hidden
+          defaultValue={user.userId as string}
+          name="userId"
+        />
         <button type="submit">Update</button>
       </form>
 

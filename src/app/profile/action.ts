@@ -6,6 +6,7 @@ import {
   UpdateUserEmail,
   UpdateUserFirstName,
   UpdateUserLastName,
+  UpdateUserState,
 } from "@/lib/user";
 import { setSessionCookie } from "@/lib/auth";
 
@@ -40,11 +41,21 @@ export async function emailAction(formData: FormData) {
 }
 
 export async function countryAction(formData: FormData) {
-  const email = formData.get("country") as string;
+  const country = formData.get("country") as string;
   const userId = formData.get("userId") as string;
 
   await FindUser(userId);
-  const data: any = await UpdateUserCountry(userId, email);
+  const data: any = await UpdateUserCountry(userId, country);
+
+  await setSessionCookie(data);
+}
+
+export async function stateAction(formData: FormData) {
+  const state = formData.get("state") as string;
+  const userId = formData.get("userId") as string;
+
+  await FindUser(userId);
+  const data: any = await UpdateUserState(userId, state);
 
   await setSessionCookie(data);
 }
