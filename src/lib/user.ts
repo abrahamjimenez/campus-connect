@@ -65,3 +65,14 @@ export async function LoginUser({
     };
   }
 }
+
+export async function UpdateUserFirstName(userId: string, firstName: string) {
+  return db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      firstName,
+    },
+  });
+}
