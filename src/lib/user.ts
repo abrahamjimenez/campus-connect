@@ -1,5 +1,5 @@
-import {compare, hash} from "bcrypt";
-import {db} from "./db";
+import { compare, hash } from "bcrypt";
+import { db } from "./db";
 
 interface RegisterProps {
   firstName: string;
@@ -41,9 +41,9 @@ export async function RegisterUser({
 }
 
 export async function LoginUser({
-                                  email,
-                                  password,
-                                }: {
+  email,
+  password,
+}: {
   email: string;
   password: string;
 }) {
@@ -66,10 +66,10 @@ export async function LoginUser({
   }
 }
 
-export async function FindUser(userId:string) {
-  return db.user.findUnique({
+export async function FindUser(userId: string) {
+  const user = await db.user.findUnique({
     where: {
-      id: userId
+      id: userId,
     },
     select: {
       id: true,
@@ -78,13 +78,25 @@ export async function FindUser(userId:string) {
       email: true,
       country: true,
       state: true,
-      phone: true
-    }
-  })
+      phone: true,
+    },
+  });
+
+  if (user) {
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
+  }
 }
 
 export async function UpdateUserFirstName(userId: string, firstName: string) {
-  return db.user.update({
+  const user = await db.user.update({
     where: {
       id: userId,
     },
@@ -98,7 +110,19 @@ export async function UpdateUserFirstName(userId: string, firstName: string) {
       email: true,
       country: true,
       state: true,
-      phone: true
-    }
+      phone: true,
+    },
   });
+
+  if (user) {
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
+  }
 }
