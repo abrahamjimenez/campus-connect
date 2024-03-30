@@ -1,7 +1,7 @@
 "use client";
 
 import React, { FormEvent } from "react";
-import { firstNameAction } from "@/app/profile/action";
+import { firstNameAction, lastNameAction } from "@/app/profile/action";
 import { JWTPayload } from "jose";
 
 const ProfileForm = ({ user }: { user: JWTPayload }) => {
@@ -12,6 +12,15 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     const formData = new FormData(form);
 
     await firstNameAction(formData);
+  };
+
+  const handleLastNameSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await lastNameAction(formData);
   };
 
   return (
@@ -34,7 +43,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form action="">
+      <form onSubmit={handleLastNameSubmit}>
         <label htmlFor="lastName">Last Name: </label>
         <br />
         <input
@@ -42,6 +51,12 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
           name="lastName"
           type="text"
           defaultValue={user.lastName as string}
+        />
+        <input
+          type="text"
+          hidden
+          defaultValue={user.userId as string}
+          name="userId"
         />
         <button type="submit">Update</button>
       </form>
