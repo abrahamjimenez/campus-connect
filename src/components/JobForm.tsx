@@ -39,6 +39,7 @@ const JobForm = ({ userId }: { userId: string }) => {
         selected={date}
         onSelect={setDate}
         className="rounded-md border"
+        ISOWeek
       />
 
       <div>
