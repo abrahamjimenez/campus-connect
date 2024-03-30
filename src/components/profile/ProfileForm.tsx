@@ -2,6 +2,7 @@
 
 import React, { FormEvent } from "react";
 import {
+  countryAction,
   emailAction,
   firstNameAction,
   lastNameAction,
@@ -34,6 +35,15 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     const formData = new FormData(form);
 
     await emailAction(formData);
+  };
+
+  const handleCountrySubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await countryAction(formData);
   };
 
   return (
@@ -99,10 +109,21 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form action="">
+      <form onSubmit={handleCountrySubmit}>
         <label htmlFor="country">Country: </label>
         <br />
-        <input id="country" name="country" type="text" />
+        <input
+          id="country"
+          name="country"
+          type="text"
+          defaultValue={user.country as string}
+        />
+        <input
+          type="text"
+          hidden
+          defaultValue={user.userId as string}
+          name="userId"
+        />
         <button type="submit">Update</button>
       </form>
 

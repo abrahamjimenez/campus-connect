@@ -2,6 +2,7 @@
 
 import {
   FindUser,
+  UpdateUserCountry,
   UpdateUserEmail,
   UpdateUserFirstName,
   UpdateUserLastName,
@@ -34,6 +35,16 @@ export async function emailAction(formData: FormData) {
 
   await FindUser(userId);
   const data: any = await UpdateUserEmail(userId, email);
+
+  await setSessionCookie(data);
+}
+
+export async function countryAction(formData: FormData) {
+  const email = formData.get("country") as string;
+  const userId = formData.get("userId") as string;
+
+  await FindUser(userId);
+  const data: any = await UpdateUserCountry(userId, email);
 
   await setSessionCookie(data);
 }
