@@ -54,6 +54,75 @@ export async function LoginUser({
   });
 
   if (user && (await compare(password, user.passwordHash))) {
-    return { firstName: user.firstName, email: user.email, userId: user.id };
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
+  }
+}
+
+export async function FindUser(userId: string) {
+  const user = await db.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      country: true,
+      state: true,
+      phone: true,
+    },
+  });
+
+  if (user) {
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
+  }
+}
+
+export async function UpdateUserFirstName(userId: string, firstName: string) {
+  const user = await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      firstName,
+    },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      country: true,
+      state: true,
+      phone: true,
+    },
+  });
+
+  if (user) {
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
   }
 }
