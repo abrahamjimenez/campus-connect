@@ -7,25 +7,28 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { JWTPayload } from "jose";
 import SignOutButton from "@/components/SignOutButton";
 import Link from "next/link";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import {
+  MagnifyingGlassIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/outline";
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "All Jobs", href: "/all-jobs" },
-  { name: "Create Job", href: "/create-job" },
-  { name: "Login", href: "/login" },
-  { name: "Register", href: "/register" },
   { name: "Profile", href: "/profile" },
+];
+
+const jobs = [
+  { name: "All Jobs", href: "/all-jobs" },
+  { name: "Create Jobs", href: "/create-job" },
+  { name: "Saved Jobs", href: "/saved-jobs" },
 ];
 
 const MobileMenu = ({ user }: { user: JWTPayload }) => {
   const pathname = usePathname();
 
   const filteredNavigation = user
-    ? navigation.filter(
-        (item) => item.name !== "Login" && item.name !== "Register",
-      )
-    : navigation;
+    ? navigation
+    : navigation.filter((item) => item.name !== "Profile");
 
   return (
     <div className="px-3 lg:hidden">
@@ -41,7 +44,9 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                 )}
               </Disclosure.Button>
 
-              <p className="text-xl">Campus Connect</p>
+              <Link href="/" className="text-xl">
+                Campus Connect
+              </Link>
               <MagnifyingGlassIcon className="h-6 w-6" />
             </div>
             <Disclosure.Panel className="text-gray-500">
@@ -60,6 +65,34 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                     {item.name}
                   </Link>
                 ))}
+
+                <Disclosure>
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button className="flex justify-between text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium">
+                        Jobs
+                        <ChevronRightIcon
+                          className={`h-6 w-6 ${open ? "rotate-90 transform" : ""}`}
+                        />
+                      </Disclosure.Button>
+                      {/*<Disclosure.Panel className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium">All Jobs</Disclosure.Panel>*/}
+                      {/*<Disclosure.Panel className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium">Saved Jobs</Disclosure.Panel>*/}
+                      {/*<Disclosure.Panel className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium">Profile</Disclosure.Panel>*/}
+                      {/*<Disclosure.Panel className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium">My Stats</Disclosure.Panel>*/}
+                      {jobs.map((item) => (
+                        <Disclosure.Panel
+                          key={item.name}
+                          className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium"
+                        >
+                          <Link href={item.href} onClick={() => close()}>
+                            {item.name}
+                          </Link>
+                        </Disclosure.Panel>
+                      ))}
+                    </>
+                  )}
+                </Disclosure>
+
                 {user ? (
                   <SignOutButton />
                 ) : (
