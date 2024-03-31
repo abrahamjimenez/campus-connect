@@ -10,6 +10,7 @@ import {
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 const jobs = [
   { name: "All Jobs", href: "/all-jobs" },
@@ -61,6 +62,9 @@ const DesktopMenu = ({ user }: { user: JWTPayload }) => {
       </li>
       <li>
         <Link href="/profile">Profile</Link>
+      </li>
+      <li>
+        <MagnifyingGlassIcon className="h-6 w-6" />
       </li>
       {user ? (
         <SignOutButton />
