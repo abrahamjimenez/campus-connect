@@ -29,7 +29,7 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
   return (
     <div className="px-3">
       <Disclosure>
-        {({ open }) => (
+        {({ open, close }) => (
           <>
             <Disclosure.Button className="py-2">
               {open ? (
@@ -49,6 +49,7 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                         ? "bg-black text-white rounded-md py-2 px-2 text-sm font-medium"
                         : "text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
                     }
+                    onClick={() => close()}
                   >
                     {item.name}
                   </Link>
@@ -60,12 +61,14 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                     <Link
                       href="/login"
                       className="text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+                      onClick={() => close()}
                     >
                       Log in
                     </Link>
                     <Link
                       href="/register"
                       className="text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+                      onClick={() => close()}
                     >
                       Sign up
                     </Link>
