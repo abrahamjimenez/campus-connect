@@ -35,8 +35,8 @@ const DesktopMenu = ({ user }: { user: JWTPayload }) => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="relative left-1/2 mt-5 flex w-screen max-w-max -translate-x-1/2">
-              <div className="w-screen max-w-md flex-auto overflow-hidden rounded bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+            <Popover.Panel className="relative left-1/2 mt-5 flex w-screen max-w-48 -translate-x-1/2">
+              <div className="w-screen flex-auto overflow-hidden rounded bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
                 <div>
                   {jobs.map((item) => (
                       <div key={item.name} className="relative flex gap-x-6 rounded-lg py-4 hover:bg-gray-50">
