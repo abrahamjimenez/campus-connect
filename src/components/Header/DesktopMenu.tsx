@@ -11,6 +11,7 @@ import {
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
 
 const jobs = [
   { name: "All Jobs", href: "/all-jobs" },
@@ -18,11 +19,27 @@ const jobs = [
   { name: "Saved Jobs", href: "/saved-jobs" },
 ];
 
+const bottomNavigation = [
+  { name: "Messages", href: "/messages" },
+  { name: "Profile", href: "/profile" },
+];
+
 const DesktopMenu = ({ user }: { user: JWTPayload }) => {
+  const pathname = usePathname();
+
   return (
     <ul className="hidden lg:flex justify-around items-center">
       <li>
-        <Link href="/">Home</Link>
+        <Link
+          href="/"
+          className={
+            pathname === "/"
+              ? "bg-black text-white rounded-md py-2 px-2 text-sm font-medium"
+              : "text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+          }
+        >
+          Home
+        </Link>
       </li>
       <Popover className="relative" as={"li"}>
         <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
@@ -57,12 +74,20 @@ const DesktopMenu = ({ user }: { user: JWTPayload }) => {
           </Popover.Panel>
         </Transition>
       </Popover>
-      <li>
-        <Link href="/messages">Messages</Link>
-      </li>
-      <li>
-        <Link href="/profile">Profile</Link>
-      </li>
+      {bottomNavigation.map((item) => (
+        <li key={item.name}>
+          <Link
+            href={item.href}
+            className={
+              pathname === item.href
+                ? "bg-black text-white rounded-md py-2 px-2 text-sm font-medium"
+                : "text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+            }
+          >
+            {item.name}
+          </Link>
+        </li>
+      ))}
       <li>
         <MagnifyingGlassIcon className="h-6 w-6" />
       </li>
