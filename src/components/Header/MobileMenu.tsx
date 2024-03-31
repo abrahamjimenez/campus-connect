@@ -12,8 +12,10 @@ import {
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 
-const navigation = [
-  { name: "Home", href: "/" },
+const navigation = [{ name: "Home", href: "/" }];
+
+const bottomNavigation = [
+  { name: "Messages", href: "/messages" },
   { name: "Profile", href: "/profile" },
 ];
 
@@ -26,9 +28,9 @@ const jobs = [
 const MobileMenu = ({ user }: { user: JWTPayload }) => {
   const pathname = usePathname();
 
-  const filteredNavigation = user
-    ? navigation
-    : navigation.filter((item) => item.name !== "Profile");
+  const bottomNavigationFilter = user
+    ? bottomNavigation
+    : bottomNavigation.filter((item) => item.name !== "Profile");
 
   return (
     <div className="px-3 lg:hidden">
@@ -51,7 +53,7 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
             </div>
             <Disclosure.Panel className="text-gray-500">
               <div className="flex flex-col">
-                {filteredNavigation.map((item) => (
+                {navigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
@@ -72,13 +74,9 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                       <Disclosure.Button className="flex justify-between text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium">
                         Jobs
                         <ChevronRightIcon
-                          className={`h-6 w-6 ${open ? "rotate-90 transform" : ""}`}
+                          className={`h-5 w-5 ${open ? "rotate-90 transform" : ""}`}
                         />
                       </Disclosure.Button>
-                      {/*<Disclosure.Panel className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium">All Jobs</Disclosure.Panel>*/}
-                      {/*<Disclosure.Panel className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium">Saved Jobs</Disclosure.Panel>*/}
-                      {/*<Disclosure.Panel className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium">Profile</Disclosure.Panel>*/}
-                      {/*<Disclosure.Panel className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium">My Stats</Disclosure.Panel>*/}
                       {jobs.map((item) => (
                         <Disclosure.Panel
                           key={item.name}
@@ -92,6 +90,21 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                     </>
                   )}
                 </Disclosure>
+
+                {bottomNavigationFilter.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={
+                      pathname === item.href
+                        ? "bg-black text-white rounded-md py-2 px-2 text-sm font-medium"
+                        : "text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+                    }
+                    onClick={() => close()}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
 
                 {user ? (
                   <SignOutButton />
