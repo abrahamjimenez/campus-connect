@@ -7,6 +7,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { JWTPayload } from "jose";
 import SignOutButton from "@/components/SignOutButton";
 import Link from "next/link";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -31,13 +32,18 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
       <Disclosure>
         {({ open, close }) => (
           <>
-            <Disclosure.Button className="py-2">
-              {open ? (
-                <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-              )}
-            </Disclosure.Button>
+            <div className="flex justify-between items-center">
+              <Disclosure.Button className="py-2">
+                {open ? (
+                  <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                )}
+              </Disclosure.Button>
+
+              <p className="text-xl">Campus Connect</p>
+              <MagnifyingGlassIcon className="h-6 w-6" />
+            </div>
             <Disclosure.Panel className="text-gray-500">
               <div className="flex flex-col">
                 {filteredNavigation.map((item) => (

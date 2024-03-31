@@ -1,9 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import { getUserFromSession } from "@/lib/auth";
-import SignOutButton from "@/components/SignOutButton";
 import MobileMenu from "@/components/Header/MobileMenu";
 import { JWTPayload } from "jose";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 const Header = async () => {
   const user = await getUserFromSession();
