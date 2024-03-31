@@ -47,7 +47,24 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                     {item.name}
                   </a>
                 ))}
-                <SignOutButton />
+                {user ? (
+                  <SignOutButton />
+                ) : (
+                  <div className="flex justify-around pb-2">
+                    <Link
+                      href="/login"
+                      className="text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+                    >
+                      Log in
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+                    >
+                      Sign up
+                    </Link>
+                  </div>
+                )}
               </div>
             </Disclosure.Panel>
           </>
