@@ -1,7 +1,15 @@
 "use client";
 
 import React, { FormEvent } from "react";
-import { firstNameAction } from "@/app/profile/action";
+import {
+  countryAction,
+  emailAction,
+  firstNameAction,
+  lastNameAction,
+  passwordAction,
+  phoneAction,
+  stateAction,
+} from "@/app/profile/action";
 import { JWTPayload } from "jose";
 
 const ProfileForm = ({ user }: { user: JWTPayload }) => {
@@ -12,6 +20,60 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     const formData = new FormData(form);
 
     await firstNameAction(formData);
+  };
+
+  const handleLastNameSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await lastNameAction(formData);
+  };
+
+  const handleEmailSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await emailAction(formData);
+  };
+
+  const handleCountrySubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await countryAction(formData);
+  };
+
+  const handleStateSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await stateAction(formData);
+  };
+
+  const handlePhoneSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await phoneAction(formData);
+  };
+
+  const handlePasswordSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await passwordAction(formData);
   };
 
   return (
@@ -26,7 +88,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
           defaultValue={user.firstName as string}
         />
         <input
-          type="text"
+          type="hidden"
           hidden
           defaultValue={user.userId as string}
           name="userId"
@@ -34,7 +96,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form action="">
+      <form onSubmit={handleLastNameSubmit}>
         <label htmlFor="lastName">Last Name: </label>
         <br />
         <input
@@ -43,10 +105,16 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
           type="text"
           defaultValue={user.lastName as string}
         />
+        <input
+          type="hidden"
+          hidden
+          defaultValue={user.userId as string}
+          name="userId"
+        />
         <button type="submit">Update</button>
       </form>
 
-      <form action="">
+      <form onSubmit={handleEmailSubmit}>
         <label htmlFor="email">Email: </label>
         <br />
         <input
@@ -55,34 +123,79 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
           type="email"
           defaultValue={user.email as string}
         />
+        <input
+          type="hidden"
+          hidden
+          defaultValue={user.userId as string}
+          name="userId"
+        />
         <button type="submit">Update</button>
       </form>
 
-      <form action="">
+      <form onSubmit={handlePasswordSubmit}>
         <label htmlFor="password">Password: </label>
         <br />
         <input id="password" name="password" type="password" />
+        <input
+          type="hidden"
+          hidden
+          defaultValue={user.userId as string}
+          name="userId"
+        />
         <button type="submit">Update</button>
       </form>
 
-      <form action="">
+      <form onSubmit={handleCountrySubmit}>
         <label htmlFor="country">Country: </label>
         <br />
-        <input id="country" name="country" type="text" />
+        <input
+          id="country"
+          name="country"
+          type="text"
+          defaultValue={user.country as string}
+        />
+        <input
+          type="hidden"
+          hidden
+          defaultValue={user.userId as string}
+          name="userId"
+        />
         <button type="submit">Update</button>
       </form>
 
-      <form action="">
+      <form onSubmit={handleStateSubmit}>
         <label htmlFor="state">State: </label>
         <br />
-        <input id="state" name="state" type="text" />
+        <input
+          id="state"
+          name="state"
+          type="text"
+          defaultValue={user.state as string}
+        />
+        <input
+          type="hidden"
+          hidden
+          defaultValue={user.userId as string}
+          name="userId"
+        />
         <button type="submit">Update</button>
       </form>
 
-      <form action="">
+      <form onSubmit={handlePhoneSubmit}>
         <label htmlFor="phone">Phone: </label>
         <br />
-        <input id="phone" name="phone" type="tel" />
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          defaultValue={user.phone as string}
+        />
+        <input
+          type="hidden"
+          hidden
+          defaultValue={user.userId as string}
+          name="userId"
+        />
         <button type="submit">Update</button>
       </form>
     </div>

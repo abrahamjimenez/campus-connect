@@ -126,3 +126,196 @@ export async function UpdateUserFirstName(userId: string, firstName: string) {
     };
   }
 }
+
+export async function UpdateUserLastName(userId: string, lastName: string) {
+  const user = await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      lastName,
+    },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      country: true,
+      state: true,
+      phone: true,
+    },
+  });
+
+  if (user) {
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
+  }
+}
+
+export async function UpdateUserEmail(userId: string, email: string) {
+  const user = await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      email,
+    },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      country: true,
+      state: true,
+      phone: true,
+    },
+  });
+
+  if (user) {
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
+  }
+}
+
+export async function UpdateUserCountry(userId: string, country: string) {
+  const user = await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      country,
+    },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      country: true,
+      state: true,
+      phone: true,
+    },
+  });
+
+  if (user) {
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
+  }
+}
+
+export async function UpdateUserState(userId: string, state: string) {
+  const user = await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      state,
+    },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      country: true,
+      state: true,
+      phone: true,
+    },
+  });
+
+  if (user) {
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
+  }
+}
+export async function UpdateUserPhone(userId: string, phone: string) {
+  const user = await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      phone,
+    },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      country: true,
+      state: true,
+      phone: true,
+    },
+  });
+
+  if (user) {
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
+  }
+}
+
+export async function UpdateUserPassword(userId: string, password: string) {
+  const passwordHash = await hash(password, 10);
+
+  const user = await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      passwordHash,
+    },
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      country: true,
+      state: true,
+      phone: true,
+    },
+  });
+
+  if (user) {
+    return {
+      userId: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      country: user.country,
+      state: user.state,
+      phone: user.phone,
+    };
+  }
+}
