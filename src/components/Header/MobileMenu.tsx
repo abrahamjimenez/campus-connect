@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { usePathname } from "next/navigation";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -19,6 +19,12 @@ const navigation = [
 
 const MobileMenu = ({ user }: { user: JWTPayload }) => {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setOpen(false)
+
+  }, [pathname]);
 
   return (
     <div className="px-3">
@@ -32,7 +38,7 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                 <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
               )}
             </Disclosure.Button>
-            <Disclosure.Panel className="text-gray-500">
+            <Disclosure.Panel static={open} className="text-gray-500">
               <div className="flex flex-col">
                 {navigation.map((item) => (
                   <a
