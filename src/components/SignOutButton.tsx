@@ -1,14 +1,15 @@
+"use client";
+
 import React from "react";
-import { deleteSessionCookie } from "@/lib/auth";
+import { signOutAction } from "@/components/action";
 
 const SignOutButton = () => {
-  async function action() {
-    "use server";
-    deleteSessionCookie();
+  async function submitHandler() {
+    await signOutAction();
   }
 
   return (
-    <form action={action}>
+    <form onSubmit={submitHandler}>
       <button type="submit">Sign out</button>
     </form>
   );

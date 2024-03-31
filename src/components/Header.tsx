@@ -3,13 +3,14 @@ import Link from "next/link";
 import { getUserFromSession } from "@/lib/auth";
 import SignOutButton from "@/components/SignOutButton";
 import MobileMenu from "@/components/Header/MobileMenu";
+import { JWTPayload } from "jose";
 
 const Header = async () => {
   const user = await getUserFromSession();
 
   return (
     <nav className="bg-yellow-500">
-      <MobileMenu />
+      <MobileMenu user={user as JWTPayload} />
 
       <ul className="flex justify-around">
         <li>
