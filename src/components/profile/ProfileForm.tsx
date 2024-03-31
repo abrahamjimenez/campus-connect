@@ -6,6 +6,7 @@ import {
   emailAction,
   firstNameAction,
   lastNameAction,
+  passwordAction,
   phoneAction,
   stateAction,
 } from "@/app/profile/action";
@@ -66,6 +67,15 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     await phoneAction(formData);
   };
 
+  const handlePasswordSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    await passwordAction(formData);
+  };
+
   return (
     <div>
       <form onSubmit={handleFirstNameSubmit}>
@@ -122,10 +132,16 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form action="">
+      <form onSubmit={handlePasswordSubmit}>
         <label htmlFor="password">Password: </label>
         <br />
         <input id="password" name="password" type="password" />
+        <input
+          type="hidden"
+          hidden
+          defaultValue={user.userId as string}
+          name="userId"
+        />
         <button type="submit">Update</button>
       </form>
 
