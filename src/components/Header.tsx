@@ -2,7 +2,6 @@ import React from "react";
 import { getUserFromSession } from "@/lib/auth";
 import MobileMenu from "@/components/Header/MobileMenu";
 import { JWTPayload } from "jose";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 const Header = async () => {
   const user = await getUserFromSession();
