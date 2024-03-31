@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { usePathname } from "next/navigation";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -20,6 +20,12 @@ const navigation = [
 const MobileMenu = ({ user }: { user: JWTPayload }) => {
   const pathname = usePathname();
 
+  const filteredNavigation = user
+    ? navigation.filter(
+        (item) => item.name !== "Login" && item.name !== "Register",
+      )
+    : navigation;
+
   return (
     <div className="px-3">
       <Disclosure>
@@ -34,8 +40,8 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
             </Disclosure.Button>
             <Disclosure.Panel className="text-gray-500">
               <div className="flex flex-col">
-                {navigation.map((item) => (
-                  <a
+                {filteredNavigation.map((item) => (
+                  <Link
                     key={item.name}
                     href={item.href}
                     className={
@@ -45,7 +51,7 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                     }
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
                 {user ? (
                   <SignOutButton />
