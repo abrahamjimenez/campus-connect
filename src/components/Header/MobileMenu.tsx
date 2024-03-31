@@ -3,14 +3,15 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import { Disclosure } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  ChevronRightIcon,
+  MagnifyingGlassIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { JWTPayload } from "jose";
 import SignOutButton from "@/components/SignOutButton";
 import Link from "next/link";
-import {
-  MagnifyingGlassIcon,
-  ChevronRightIcon,
-} from "@heroicons/react/24/outline";
 
 const navigation = [{ name: "Home", href: "/" }];
 

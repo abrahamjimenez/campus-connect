@@ -1,8 +1,6 @@
 import React from "react";
-import Link from "next/link";
 import { getUserFromSession } from "@/lib/auth";
 import MobileMenu from "@/components/Header/MobileMenu";
-import SignOutButton from "@/components/SignOutButton";
 import { JWTPayload } from "jose";
 import DesktopMenu from "@/components/Header/DesktopMenu";
 
