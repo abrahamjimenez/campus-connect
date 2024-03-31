@@ -12,19 +12,11 @@ import {
 import { JWTPayload } from "jose";
 import SignOutButton from "@/components/SignOutButton";
 import Link from "next/link";
-
-const navigation = [{ name: "Home", href: "/" }];
-
-const bottomNavigation = [
-  { name: "Messages", href: "/messages" },
-  { name: "Profile", href: "/profile" },
-];
-
-const jobs = [
-  { name: "All Jobs", href: "/all-jobs" },
-  { name: "Create Jobs", href: "/create-job" },
-  { name: "Saved Jobs", href: "/saved-jobs" },
-];
+import {
+  bottomNavigation,
+  navigation,
+  jobs,
+} from "@/components/Header/navigation";
 
 const MobileMenu = ({ user }: { user: JWTPayload }) => {
   const pathname = usePathname();

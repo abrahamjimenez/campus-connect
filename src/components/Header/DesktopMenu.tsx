@@ -8,17 +8,11 @@ import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
-
-const jobs = [
-  { name: "All Jobs", href: "/all-jobs" },
-  { name: "Create Jobs", href: "/create-job" },
-  { name: "Saved Jobs", href: "/saved-jobs" },
-];
-
-const bottomNavigation = [
-  { name: "Messages", href: "/messages" },
-  { name: "Profile", href: "/profile" },
-];
+import {
+  bottomNavigation,
+  navigation,
+  jobs,
+} from "@/components/Header/navigation";
 
 const DesktopMenu = ({ user }: { user: JWTPayload }) => {
   const pathname = usePathname();
@@ -26,16 +20,20 @@ const DesktopMenu = ({ user }: { user: JWTPayload }) => {
   return (
     <ul className="hidden lg:flex justify-around items-center">
       <li>
-        <Link
-          href="/"
-          className={
-            pathname === "/"
-              ? "bg-black text-white rounded-md py-2 px-2 text-sm font-medium"
-              : "text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
-          }
-        >
-          Home
-        </Link>
+        {navigation.map((item) => (
+          <Link
+            key={item.name}
+            href={item.href}
+            className={
+              pathname === item.href
+                ? "bg-black text-white rounded-md py-2 px-2 text-sm font-medium"
+                : "text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+            }
+            onClick={() => close()}
+          >
+            {item.name}
+          </Link>
+        ))}
       </li>
       <Popover className="relative" as={"li"}>
         <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
