@@ -9,7 +9,7 @@ const SignOutButton = () => {
   }
 
   return (
-    <form onSubmit={submitHandler} className="self-end pb-2">
+    <form onSubmit={submitHandler} className="self-end">
       <button
         type="submit"
         className="text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
