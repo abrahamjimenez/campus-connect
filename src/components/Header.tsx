@@ -1,7 +1,10 @@
 import React from "react";
+import Link from "next/link";
 import { getUserFromSession } from "@/lib/auth";
 import MobileMenu from "@/components/Header/MobileMenu";
+import SignOutButton from "@/components/SignOutButton";
 import { JWTPayload } from "jose";
+import DesktopMenu from "@/components/Header/DesktopMenu";
 
 const Header = async () => {
   const user = await getUserFromSession();
@@ -10,22 +13,8 @@ const Header = async () => {
     <nav className="bg-yellow-500">
       <MobileMenu user={user as JWTPayload} />
 
-      {/*<ul className="flex justify-around">*/}
-      {/*  <li>*/}
-      {/*    <Link href="/">Home</Link>*/}
-      {/*  </li>*/}
-      {/*  <li>*/}
-      {/*    <Link href="/">About</Link>*/}
-      {/*  </li>*/}
-      {/*  {user ? (*/}
-      {/*    <SignOutButton />*/}
-      {/*  ) : (*/}
-      {/*    <div className="flex flex-col">*/}
-      {/*      <Link href="/login">Log in</Link>*/}
-      {/*      <Link href="/register">Sign up</Link>*/}
-      {/*    </div>*/}
-      {/*  )}*/}
-      {/*</ul>*/}
+      {/* todo: add navbar for lg screens*/}
+      <DesktopMenu user={user as JWTPayload} />
     </nav>
   );
 };

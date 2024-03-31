@@ -28,7 +28,7 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
     : navigation;
 
   return (
-    <div className="px-3">
+    <div className="px-3 lg:hidden">
       <Disclosure>
         {({ open, close }) => (
           <>
