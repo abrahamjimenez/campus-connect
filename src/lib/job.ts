@@ -37,5 +37,8 @@ export async function CreateJob({
 export async function DisplayJobs() {
   return db.job.findMany({
     take: 10,
+    orderBy: {
+      updatedAt: "desc",
+    },
   });
 }
