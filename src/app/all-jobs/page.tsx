@@ -3,18 +3,22 @@ import { DisplayJobs } from "@/lib/job";
 
 const Page = async () => {
   const jobs = await DisplayJobs();
-  console.log(jobs);
 
   return (
     <div>
       {jobs.map((job) => (
-        <div key={job.id} className="border border-black py-4">
-          <h2>{job.title}</h2>
+        <div key={job.id} className="border border-black py-4 flex flex-col gap-4">
+          <h2 className="font-bold">{job.title}</h2>
+          <div className={"flex gap-1 font-extralight text-xs"}>
+            <p className="">Price: {job.price !== 0 ? `$${job.price}` : "Unpaid"}</p>
+            <p>|</p>
+            <p>Due: {job.dueDate.toString().slice(4, 10)}, {job.dueDate.toString().slice(10, 15)}</p>
+          </div>
           <p>{job.description}</p>
-          <p>Price: {job.price !== 0 ? `$${job.price}` : "Unpaid"}</p>
-          <p>Due Date: {job.dueDate.toString().slice(0, 10)}</p>
           <p>School Year: {job.schoolYear.join(", ")}</p>
-          <p>Skills: {job.skills.join(", ")}</p>
+          <div className={"flex gap-2 items-center"}>{job.skills.map((skill, index) => (
+              <span key={index} className={skill && "border border-black rounded-xl p-1"}>{skill} {" "}</span>
+          ))}</div>
         </div>
       ))}
     </div>
