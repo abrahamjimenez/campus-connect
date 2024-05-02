@@ -1,4 +1,5 @@
 import React from "react";
+import { formatDistanceToNow } from "date-fns";
 import { DisplayJobs } from "@/lib/job";
 
 const Page = async () => {
@@ -9,35 +10,7 @@ const Page = async () => {
   };
 
   const showTimePostedAt = (jobUpdated: Date | any) => {
-    const currentDate: Date | any = new Date();
-
-    // subtract dates and find difference
-    const diff = currentDate.getTime() - jobUpdated.getTime();
-    const diffMinutes = Math.floor(diff / (1000 * 60)); // Convert milliseconds to minutes
-    const diffHours = Math.floor(diff / (1000 * 60 * 60)); // Convert milliseconds to hours
-    const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
-
-    if (diffDays >= 2) {
-      return diffDays + " days ago";
-    }
-
-    if (diffDays >= 1) {
-      return "1 day ago";
-    }
-
-    if (diffHours >= 2) {
-      return diffHours + " hours ago";
-    }
-
-    if (diffHours >= 1) {
-      return "1 hour ago";
-    }
-
-    if (diffMinutes >= 2) {
-      return diffMinutes + " minutes ago";
-    }
-
-    return "Just now"; // Assuming you want to show "Just now" for recent updates
+    return formatDistanceToNow(jobUpdated, { addSuffix: true });
   };
 
   return (
