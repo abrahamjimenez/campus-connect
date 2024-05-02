@@ -1,7 +1,6 @@
 export const navigation = [{ name: "Home", href: "/" }];
 
 export const bottomNavigation = [
-  { name: "Messages", href: "/messages" },
   { name: "Profile", href: "/profile" },
 ];
 
