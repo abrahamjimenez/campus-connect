@@ -1,17 +1,9 @@
 import React from "react";
-import { formatDistanceToNow } from "date-fns";
 import { DisplayJobs } from "@/lib/job";
+import { calculateDateDifference, showTimePostedAt } from "@/lib/dateUtils";
 
 const Page = async () => {
   const jobs = await DisplayJobs();
-
-  const calculateDateDifference = (jobUpdated: Date) => {
-    return jobUpdated.toString().slice(4, 15); // Jan 01, 2025
-  };
-
-  const showTimePostedAt = (jobUpdated: Date | any) => {
-    return formatDistanceToNow(jobUpdated, { addSuffix: true });
-  };
 
   return (
     <div>
