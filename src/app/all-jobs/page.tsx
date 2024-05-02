@@ -5,25 +5,40 @@ const Page = async () => {
   const jobs = await DisplayJobs();
 
   const calculateDateDifference = (jobUpdated: Date) => {
-    return jobUpdated.toString().slice(4, 15);
+    return jobUpdated.toString().slice(4, 15); // Jan 01, 2025
   };
 
-  /*const calculateDateDifference = (jobs) => {
-    // date updatedAt
-    const date1 = new Date(jobs[0].updatedAt);
-    console.log(date1);
+  const showTimePostedAt = (jobUpdated: Date | any) => {
+    const currentDate: Date | any = new Date();
 
-    // current date
-    const date2 = new Date();
-    console.log(date2);
+    // subtract dates and find difference
+    const diff = currentDate.getTime() - jobUpdated.getTime();
+    const diffMinutes = Math.floor(diff / (1000 * 60)); // Convert milliseconds to minutes
+    const diffHours = Math.floor(diff / (1000 * 60 * 60)); // Convert milliseconds to hours
+    const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
 
-    // subtract dates
-    const diff = date2 - date1; // prints in milliseconds
-    const diffDays = diff / (1000 * 60 * 60 * 24); // convert ms to days
-    const diffHours = diff / (1000 * 60 * 60); // convert ms to hours
+    if (diffDays >= 2) {
+      return diffDays + " days ago";
+    }
 
-    return diffHours;
-  }*/
+    if (diffDays >= 1) {
+      return "1 day ago";
+    }
+
+    if (diffHours >= 2) {
+      return diffHours + " hours ago";
+    }
+
+    if (diffHours >= 1) {
+      return "1 hour ago";
+    }
+
+    if (diffMinutes >= 2) {
+      return diffMinutes + " minutes ago";
+    }
+
+    return "Just now"; // Assuming you want to show "Just now" for recent updates
+  };
 
   return (
     <div>
@@ -32,10 +47,11 @@ const Page = async () => {
           key={job.id}
           className="border border-black py-4 flex flex-col gap-4"
         >
-          {/*<p className={"flex gap-1 font-extralight text-xs"}>Posted: {diffHours > 24 ? (diffDays.toFixed(0) + ' days ago') : (diffHours.toFixed(0) + " hours ago")}</p>*/}
-          <p className={"flex gap-1 font-extralight text-xs"}>
-            Posted: {calculateDateDifference(job.updatedAt)}
-          </p>
+          <div className={"flex gap-1 font-extralight text-xs"}>
+            <p>Posted: {calculateDateDifference(job.updatedAt)}</p>
+            <p>-</p>
+            <p>{showTimePostedAt(job.updatedAt)}</p>
+          </div>
           <h2 className="font-bold">{job.title}</h2>
           <div className={"flex gap-1 font-extralight text-xs"}>
             <p className="">
