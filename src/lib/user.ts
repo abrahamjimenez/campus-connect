@@ -27,7 +27,7 @@ export async function RegisterUser({
   }
 
   try {
-    return db.user.create({
+    await db.user.create({
       data: {
         firstName,
         lastName,
@@ -66,7 +66,7 @@ export async function LoginUser({
   }
 }
 
-export async function FindUser(userId: string) {
+export async function FindUser(userId: number) {
   const user = await db.user.findUnique({
     where: {
       id: userId,
@@ -95,7 +95,7 @@ export async function FindUser(userId: string) {
   }
 }
 
-export async function UpdateUserFirstName(userId: string, firstName: string) {
+export async function UpdateUserFirstName(userId: number, firstName: string) {
   const user = await db.user.update({
     where: {
       id: userId,
@@ -127,7 +127,7 @@ export async function UpdateUserFirstName(userId: string, firstName: string) {
   }
 }
 
-export async function UpdateUserLastName(userId: string, lastName: string) {
+export async function UpdateUserLastName(userId: number, lastName: string) {
   const user = await db.user.update({
     where: {
       id: userId,
@@ -159,7 +159,7 @@ export async function UpdateUserLastName(userId: string, lastName: string) {
   }
 }
 
-export async function UpdateUserEmail(userId: string, email: string) {
+export async function UpdateUserEmail(userId: number, email: string) {
   const user = await db.user.update({
     where: {
       id: userId,
@@ -191,7 +191,7 @@ export async function UpdateUserEmail(userId: string, email: string) {
   }
 }
 
-export async function UpdateUserCountry(userId: string, country: string) {
+export async function UpdateUserCountry(userId: number, country: string) {
   const user = await db.user.update({
     where: {
       id: userId,
@@ -223,7 +223,7 @@ export async function UpdateUserCountry(userId: string, country: string) {
   }
 }
 
-export async function UpdateUserState(userId: string, state: string) {
+export async function UpdateUserState(userId: number, state: string) {
   const user = await db.user.update({
     where: {
       id: userId,
@@ -254,7 +254,7 @@ export async function UpdateUserState(userId: string, state: string) {
     };
   }
 }
-export async function UpdateUserPhone(userId: string, phone: string) {
+export async function UpdateUserPhone(userId: number, phone: string) {
   const user = await db.user.update({
     where: {
       id: userId,
@@ -286,7 +286,7 @@ export async function UpdateUserPhone(userId: string, phone: string) {
   }
 }
 
-export async function UpdateUserPassword(userId: string, password: string) {
+export async function UpdateUserPassword(userId: number, password: string) {
   const passwordHash = await hash(password, 10);
 
   const user = await db.user.update({

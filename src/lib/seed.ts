@@ -1,17 +1,17 @@
 import { db } from "./db";
-
-export async function seedPost() {
+import { hash } from "bcrypt";
+export async function seedJob() {
   await db.job.create({
     data: {
       createdAt: new Date(),
       description: "This is a sample post",
       dueDate: new Date(),
       price: 100,
-      schoolYear: ["2022", "2023"],
+      schoolYear: ["Freshman", "Senior"],
       skills: ["skill1", "skill2"],
       title: "Sample Post",
       updatedAt: new Date(),
-      userId: "65f7b8016acfc0241d813b96",
+      userId: 10000,
     },
   });
 }
@@ -19,17 +19,21 @@ export async function seedPost() {
 export async function seedUser() {
   await db.user.create({
     data: {
-      id: "65f7b8016acfc0241d813b96",
+      id: 10000,
       country: "United States",
       email: "jane@email.com",
       firstName: "Jane",
       lastName: "Doe",
-      passwordHash: "jane123",
+      passwordHash: await hash("jane123", 10),
       phone: "098-765-4321",
       state: "United States",
     },
   });
 }
 
-seedUser();
-seedPost();
+async function seedAll() {
+  await seedUser();
+  await seedJob();
+}
+
+seedAll();
