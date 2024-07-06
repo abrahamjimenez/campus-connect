@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 
 interface Job {
-  userId: string;
+  userId: number;
   title: string;
   description: string;
   price: number;

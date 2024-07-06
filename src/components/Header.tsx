@@ -10,8 +10,6 @@ const Header = async () => {
   return (
     <nav className="bg-yellow-500">
       <MobileMenu user={user as JWTPayload} />
-
-      {/* todo: add navbar for lg screens*/}
       <DesktopMenu user={user as JWTPayload} />
     </nav>
   );

@@ -1,35 +1,51 @@
 import { db } from "./db";
+import { hash } from "bcrypt";
+import colors from "colors";
 
-export async function seedPost() {
+colors.enable();
+
+async function seedJob() {
   await db.job.create({
     data: {
       createdAt: new Date(),
-      description: "This is a sample post",
+      description: "I need someone to build my portfolio with React + Postgres",
       dueDate: new Date(),
       price: 100,
-      schoolYear: ["2022", "2023"],
-      skills: ["skill1", "skill2"],
-      title: "Sample Post",
+      schoolYear: ["Freshman", "Sophomore", "Junior", "Senior"],
+      skills: ["React", "Postgres"],
+      title: "Web Portfolio Needed!",
       updatedAt: new Date(),
-      userId: "65f7b8016acfc0241d813b96",
+      userId: 10000,
     },
   });
 }
 
-export async function seedUser() {
+async function seedUser() {
   await db.user.create({
     data: {
-      id: "65f7b8016acfc0241d813b96",
+      id: 10000,
       country: "United States",
-      email: "jane@email.com",
-      firstName: "Jane",
-      lastName: "Doe",
-      passwordHash: "jane123",
-      phone: "098-765-4321",
-      state: "United States",
+      email: "admin@email.com",
+      firstName: "Admin",
+      lastName: "",
+      passwordHash: await hash("123456", 10),
+      phone: "123-456-7890",
+      state: "Idaho",
     },
   });
 }
 
-seedUser();
-seedPost();
+async function deleteData() {
+  await db.job.deleteMany({});
+  await db.user.deleteMany({});
+}
+
+async function seedAll() {
+  await deleteData();
+  await seedUser();
+  await seedJob();
+}
+
+seedAll()
+  .then(() => console.log("Seeding successful".green))
+  .catch((e) => console.error(`Seeding failed: ${e}`.red));

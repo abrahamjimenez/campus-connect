@@ -5,7 +5,6 @@ import ProfileForm from "@/components/profile/ProfileForm";
 
 const Page = async () => {
   const user = await getUserFromSession();
-  // console.log(user);
 
   return (
     <div>

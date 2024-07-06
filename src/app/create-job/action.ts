@@ -19,9 +19,8 @@ export async function jobAction(formData: FormData) {
     ].filter(Boolean),
     skills: (formData.get("skills") as string).split(","),
     // pass user id as a prop?
-    userId: formData.get("userId") as string,
+    userId: parseInt(formData.get("userId") as string),
   };
 
-  // console.log("jobAction", data);
   await CreateJob(data);
 }

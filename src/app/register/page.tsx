@@ -34,7 +34,6 @@ const Page = () => {
         name="lastName"
         type="text"
         autoComplete="family-name"
-        required
       />
 
       <label htmlFor="email">Email address</label>

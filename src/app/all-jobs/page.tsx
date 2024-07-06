@@ -31,9 +31,9 @@ const Page = async () => {
           <p>{job.description}</p>
           <p>School Year: {job.schoolYear.join(", ")}</p>
           <div className={"flex gap-2 items-center"}>
-            {job.skills.map((skill, index) => (
+            {job.skills.map((skill) => (
               <span
-                key={index}
+                key={skill}
                 className={skill && "border border-black rounded-xl p-1"}
               >
                 {skill}{" "}

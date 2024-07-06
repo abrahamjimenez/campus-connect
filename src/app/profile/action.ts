@@ -14,7 +14,7 @@ import { setSessionCookie } from "@/lib/auth";
 
 export async function firstNameAction(formData: FormData) {
   const firstName = formData.get("firstName") as string;
-  const userId = formData.get("userId") as string;
+  const userId = parseInt(formData.get("userId") as string);
 
   await FindUser(userId);
   const data: any = await UpdateUserFirstName(userId, firstName);
@@ -24,7 +24,7 @@ export async function firstNameAction(formData: FormData) {
 
 export async function lastNameAction(formData: FormData) {
   const lastName = formData.get("lastName") as string;
-  const userId = formData.get("userId") as string;
+  const userId = parseInt(formData.get("userId") as string);
 
   await FindUser(userId);
   const data: any = await UpdateUserLastName(userId, lastName);
@@ -34,7 +34,7 @@ export async function lastNameAction(formData: FormData) {
 
 export async function emailAction(formData: FormData) {
   const email = formData.get("email") as string;
-  const userId = formData.get("userId") as string;
+  const userId = parseInt(formData.get("userId") as string);
 
   await FindUser(userId);
   const data: any = await UpdateUserEmail(userId, email);
@@ -44,7 +44,7 @@ export async function emailAction(formData: FormData) {
 
 export async function countryAction(formData: FormData) {
   const country = formData.get("country") as string;
-  const userId = formData.get("userId") as string;
+  const userId = parseInt(formData.get("userId") as string);
 
   await FindUser(userId);
   const data: any = await UpdateUserCountry(userId, country);
@@ -54,7 +54,7 @@ export async function countryAction(formData: FormData) {
 
 export async function stateAction(formData: FormData) {
   const state = formData.get("state") as string;
-  const userId = formData.get("userId") as string;
+  const userId = parseInt(formData.get("userId") as string);
 
   await FindUser(userId);
   const data: any = await UpdateUserState(userId, state);
@@ -64,7 +64,7 @@ export async function stateAction(formData: FormData) {
 
 export async function phoneAction(formData: FormData) {
   const phone = formData.get("phone") as string;
-  const userId = formData.get("userId") as string;
+  const userId = parseInt(formData.get("userId") as string);
 
   await FindUser(userId);
   const data: any = await UpdateUserPhone(userId, phone);
@@ -74,7 +74,7 @@ export async function phoneAction(formData: FormData) {
 
 export async function passwordAction(formData: FormData) {
   const password = formData.get("password") as string;
-  const userId = formData.get("userId") as string;
+  const userId = parseInt(formData.get("userId") as string);
 
   await FindUser(userId);
   const data: any = await UpdateUserPassword(userId, password);
