@@ -16,7 +16,74 @@ import {
   bottomNavigation,
   navigation,
   jobs,
+  notLoggedIn,
 } from "@/components/Header/navigation";
+
+interface Item {
+  name: string;
+  href: string;
+}
+
+type CloseFunction = (
+  focusableElement?: HTMLElement | React.MutableRefObject<HTMLElement | null>,
+) => void;
+
+const NavigationSection = ({
+  item,
+  pathname,
+  close,
+}: {
+  item: Item;
+  pathname: string;
+  close: CloseFunction;
+}) => (
+  <Link
+    key={item.name}
+    href={item.href}
+    className={
+      pathname === item.href
+        ? "bg-black text-white rounded-md py-2 px-2 text-sm font-medium"
+        : "text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+    }
+    onClick={() => close()}
+  >
+    {item.name}
+  </Link>
+);
+
+const JobsSection = ({ item, close }: { item: Item; close: CloseFunction }) => (
+  <Disclosure.Panel
+    key={item.name}
+    className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium"
+  >
+    <Link href={item.href} onClick={() => close()}>
+      {item.name}
+    </Link>
+  </Disclosure.Panel>
+);
+
+const BottomNavigation = ({
+  item,
+  pathname,
+  close,
+}: {
+  item: Item;
+  pathname: string;
+  close: CloseFunction;
+}) => (
+  <Link
+    key={item.name}
+    href={item.href}
+    className={
+      pathname === item.href
+        ? "bg-black text-white rounded-md py-2 px-2 text-sm font-medium"
+        : "text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+    }
+    onClick={() => close()}
+  >
+    {item.name}
+  </Link>
+);
 
 const MobileMenu = ({ user }: { user: JWTPayload }) => {
   const pathname = usePathname();
@@ -47,18 +114,12 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
             <Disclosure.Panel className="text-gray-500">
               <div className="flex flex-col">
                 {navigation.map((item) => (
-                  <Link
+                  <NavigationSection
                     key={item.name}
-                    href={item.href}
-                    className={
-                      pathname === item.href
-                        ? "bg-black text-white rounded-md py-2 px-2 text-sm font-medium"
-                        : "text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
-                    }
-                    onClick={() => close()}
-                  >
-                    {item.name}
-                  </Link>
+                    item={item}
+                    pathname={pathname}
+                    close={close}
+                  />
                 ))}
 
                 <Disclosure>
@@ -71,52 +132,39 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                         />
                       </Disclosure.Button>
                       {jobs.map((item) => (
-                        <Disclosure.Panel
+                        <JobsSection
                           key={item.name}
-                          className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium"
-                        >
-                          <Link href={item.href} onClick={() => close()}>
-                            {item.name}
-                          </Link>
-                        </Disclosure.Panel>
+                          item={item}
+                          close={close}
+                        />
                       ))}
                     </>
                   )}
                 </Disclosure>
 
                 {bottomNavigationFilter.map((item) => (
-                  <Link
+                  <BottomNavigation
                     key={item.name}
-                    href={item.href}
-                    className={
-                      pathname === item.href
-                        ? "bg-black text-white rounded-md py-2 px-2 text-sm font-medium"
-                        : "text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
-                    }
-                    onClick={() => close()}
-                  >
-                    {item.name}
-                  </Link>
+                    item={item}
+                    pathname={pathname}
+                    close={close}
+                  />
                 ))}
 
                 {user ? (
                   <SignOutButton />
                 ) : (
                   <div className="flex justify-around pb-2">
-                    <Link
-                      href="/login"
-                      className="text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
-                      onClick={() => close()}
-                    >
-                      Log in
-                    </Link>
-                    <Link
-                      href="/register"
-                      className="text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
-                      onClick={() => close()}
-                    >
-                      Sign up
-                    </Link>
+                    {notLoggedIn.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+                        onClick={() => close()}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
                   </div>
                 )}
               </div>

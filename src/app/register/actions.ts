@@ -25,7 +25,6 @@ export async function registerAction(formData: FormData) {
       email: user.email,
     };
     await setSessionCookie(userData);
-    // console.log("registerAction:", user);
     redirect("/");
   }
 }
