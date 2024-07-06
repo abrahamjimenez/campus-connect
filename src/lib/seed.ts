@@ -15,7 +15,7 @@ async function seedJob() {
       skills: ["React", "Postgres"],
       title: "Web Portfolio Needed!",
       updatedAt: new Date(),
-      userId: 10000,
+      userId: 1,
     },
   });
 }
@@ -23,7 +23,7 @@ async function seedJob() {
 async function seedUser() {
   await db.user.create({
     data: {
-      id: 10000,
+      id: 1,
       country: "United States",
       email: "admin@email.com",
       firstName: "Admin",
