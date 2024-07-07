@@ -1,6 +1,7 @@
 "use server";
 
 import { CreateJob } from "@/lib/job";
+import { redirect } from "next/navigation";
 
 export async function jobAction(formData: FormData) {
   const data = {
@@ -23,4 +24,5 @@ export async function jobAction(formData: FormData) {
   };
 
   await CreateJob(data);
+  redirect("/");
 }

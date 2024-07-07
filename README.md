@@ -6,8 +6,12 @@
 1. Copy & paste the `.env.example` file in the root of the project as `.env`.
 2. Generate your own `JWT_SECRET` with this terminal command and update your `.env` `JWT_SECRET` with the generated value:
     ```bash
-    openssl rand -hex 32
+    node --print "require('crypto').randomBytes(32).toString('hex')"
     ```
+   or
+   ```bash
+     openssl rand -hex 32
+   ```
 
 ### Set Up Docker
 1. Pull the Postgres image:
