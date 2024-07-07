@@ -20,7 +20,7 @@ export async function loginAction(formData: FormData) {
     await setSessionCookie(user);
     redirect("/");
   } else {
-    console.error("Login error")
-    return {isError: true, message: "Incorrect email or password"}
+    console.error("Login error");
+    return { isError: true, message: "Incorrect email or password" };
   }
 }

@@ -1,10 +1,10 @@
 "use client";
 
-import React, {FormEvent, useState} from "react";
+import React, { FormEvent, useState } from "react";
 import { loginAction } from "@/app/login/actions";
 
 const Page = () => {
-    const [errorMessage, setErrorMessage] = useState<string>()
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -12,12 +12,12 @@ const Page = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const error = await loginAction(formData);
-    setErrorMessage(error?.message)
+    setErrorMessage(error?.message);
   };
 
   return (
     <form onSubmit={submitHandler}>
-        {errorMessage && <p className="text-red-600">{errorMessage}</p> }
+      {errorMessage && <p className="text-red-600">{errorMessage}</p>}
 
       <label htmlFor="email">Email address</label>
       <input
