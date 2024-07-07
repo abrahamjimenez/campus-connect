@@ -1,5 +1,6 @@
 import { compare, hash } from "bcrypt";
 import { db } from "./db";
+import {UserError, RegisterUserInterface} from "@/app/register/actions";
 
 interface RegisterProps {
   firstName: string;
@@ -8,16 +9,12 @@ interface RegisterProps {
   password: string;
 }
 
-/**
- * @description Public
- * @public
- */
 export async function RegisterUser({
   firstName,
   lastName,
   email,
   password,
-}: RegisterProps) {
+}: RegisterProps):Promise<UserError | RegisterUserInterface>  {
   const passwordHash = await hash(password, 10);
   const existingUser = await db.user.findUnique({ where: { email } });
 
@@ -27,7 +24,7 @@ export async function RegisterUser({
   }
 
   try {
-    await db.user.create({
+    return await db.user.create({
       data: {
         firstName,
         lastName,
@@ -36,7 +33,9 @@ export async function RegisterUser({
       },
     });
   } catch (e) {
-    console.log(e);
+    console.error(e);
+    return { isError: true, message: "Could not register" };
+
   }
 }
 
