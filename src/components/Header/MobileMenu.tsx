@@ -2,7 +2,11 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
-import { Disclosure } from "@headlessui/react";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
 import {
   Bars3Icon,
   ChevronRightIcon,
@@ -28,7 +32,7 @@ type CloseFunction = (
   focusableElement?: HTMLElement | React.MutableRefObject<HTMLElement | null>,
 ) => void;
 
-const NavigationSection = ({
+const NavLink = ({
   item,
   pathname,
   close,
@@ -51,15 +55,25 @@ const NavigationSection = ({
   </Link>
 );
 
+const NavigationSection = ({
+  item,
+  pathname,
+  close,
+}: {
+  item: Item;
+  pathname: string;
+  close: CloseFunction;
+}) => <NavLink item={item} pathname={pathname} close={close} />;
+
 const JobsSection = ({ item, close }: { item: Item; close: CloseFunction }) => (
-  <Disclosure.Panel
+  <DisclosurePanel
     key={item.name}
     className="text-black hover:bg-black hover:text-white rounded-md py-2 px-4 text-sm font-medium"
   >
     <Link href={item.href} onClick={() => close()}>
       {item.name}
     </Link>
-  </Disclosure.Panel>
+  </DisclosurePanel>
 );
 
 const BottomNavigation = ({
@@ -70,20 +84,7 @@ const BottomNavigation = ({
   item: Item;
   pathname: string;
   close: CloseFunction;
-}) => (
-  <Link
-    key={item.name}
-    href={item.href}
-    className={
-      pathname === item.href
-        ? "bg-black text-white rounded-md py-2 px-2 text-sm font-medium"
-        : "text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
-    }
-    onClick={() => close()}
-  >
-    {item.name}
-  </Link>
-);
+}) => <NavLink item={item} pathname={pathname} close={close} />;
 
 const MobileMenu = ({ user }: { user: JWTPayload }) => {
   const pathname = usePathname();
@@ -98,20 +99,20 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
         {({ open, close }) => (
           <>
             <div className="flex justify-between items-center">
-              <Disclosure.Button className="py-2">
+              <DisclosureButton className="py-2">
                 {open ? (
                   <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                 ) : (
                   <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                 )}
-              </Disclosure.Button>
+              </DisclosureButton>
 
               <Link href="/" className="text-xl">
                 Campus Connect
               </Link>
               <MagnifyingGlassIcon className="h-6 w-6" />
             </div>
-            <Disclosure.Panel className="text-gray-500">
+            <DisclosurePanel className="text-gray-500">
               <div className="flex flex-col">
                 {navigation.map((item) => (
                   <NavigationSection
@@ -125,12 +126,12 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                 <Disclosure>
                   {({ open }) => (
                     <>
-                      <Disclosure.Button className="flex justify-between text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium">
+                      <DisclosureButton className="flex justify-between text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium">
                         Jobs
                         <ChevronRightIcon
                           className={`h-5 w-5 ${open ? "rotate-90 transform" : ""}`}
                         />
-                      </Disclosure.Button>
+                      </DisclosureButton>
                       {jobs.map((item) => (
                         <JobsSection
                           key={item.name}
@@ -168,7 +169,7 @@ const MobileMenu = ({ user }: { user: JWTPayload }) => {
                   </div>
                 )}
               </div>
-            </Disclosure.Panel>
+            </DisclosurePanel>
           </>
         )}
       </Disclosure>

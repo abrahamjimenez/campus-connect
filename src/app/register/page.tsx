@@ -4,7 +4,7 @@ import React, { FormEvent, useState } from "react";
 import { registerAction } from "@/app/register/actions";
 
 const Page = () => {
-  const [errorMessage, setErrorMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

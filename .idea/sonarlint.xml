@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SonarLintProjectSettings">
+    <option name="bindingEnabled" value="true" />
     <option name="fileExclusions">
       <list>
         <option value="FILE:src/components/ui/calendar.tsx" />
       </list>
     </option>
+    <option name="projectKey" value="Campus-Connect" />
+    <option name="serverId" value="Campus-Connect" />
   </component>
 </project>
