@@ -49,3 +49,9 @@ You can change credentials in your `.env` file if needed.
     ```bash
     npx prisma db seed
     ```
+
+### Set up Sonarqube
+- Open localhost:9000
+- Login with
+  - **Username:** admin
+  - **Password:** admin
