@@ -12,5 +12,26 @@ services:
     ports:
       - "5432:5432"
 
+  sonarqube:
+    image: sonarqube
+    restart: always
+    environment:
+      SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonarqube_data:/var/lib/sonarqube/data
+
+  sonar-scanner:
+    image: sonarsource/sonar-scanner-cli
+    environment:
+      SONAR_HOST_URL: ${SONARQUBE_URL}
+      SONAR_TOKEN: ${SONAR_TOKEN}
+    volumes:
+      - "${YOUR_REPO}:/usr/src"
+    network_mode: "host"
+
 volumes:
   db_data:
+  sonarqube_data:
+  sonar-scanner_data:
