@@ -16,7 +16,7 @@ const Page = () => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} noValidate>
       {errorMessage && <p className="text-red-600">{errorMessage}</p>}
 
       <label htmlFor="email">Email address</label>
