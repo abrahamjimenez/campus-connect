@@ -4,7 +4,12 @@ import React, { Fragment } from "react";
 import Link from "next/link";
 import SignOutButton from "@/components/SignOutButton";
 import { JWTPayload } from "jose";
-import { Popover, Transition } from "@headlessui/react";
+import {
+  Popover,
+  PopoverButton,
+  PopoverPanel,
+  Transition,
+} from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { usePathname } from "next/navigation";
@@ -36,10 +41,10 @@ const DesktopMenu = ({ user }: { user: JWTPayload }) => {
         ))}
       </li>
       <Popover className="relative" as={"li"}>
-        <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+        <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
           <span>Jobs</span>
           <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
-        </Popover.Button>
+        </PopoverButton>
 
         <Transition
           as={Fragment}
@@ -50,7 +55,7 @@ const DesktopMenu = ({ user }: { user: JWTPayload }) => {
           leaveFrom="opacity-100 translate-y-0"
           leaveTo="opacity-0 translate-y-1"
         >
-          <Popover.Panel className="absolute left-1/2 mt-5 flex w-screen max-w-48 -translate-x-1/2">
+          <PopoverPanel className="absolute left-1/2 mt-5 flex w-screen max-w-48 -translate-x-1/2">
             <div className="w-screen flex-auto overflow-hidden rounded bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
               {jobs.map((item) => (
                 <div
@@ -65,7 +70,7 @@ const DesktopMenu = ({ user }: { user: JWTPayload }) => {
                 </div>
               ))}
             </div>
-          </Popover.Panel>
+          </PopoverPanel>
         </Transition>
       </Popover>
       {bottomNavigation.map((item) => (
@@ -89,8 +94,11 @@ const DesktopMenu = ({ user }: { user: JWTPayload }) => {
         <SignOutButton />
       ) : (
         <li className="flex flex-col">
-          <Link href="/login">Log in</Link>
-          <Link href="/register">Sign up</Link>
+          {navigation.map((item) => (
+            <Link key={item.name} href={item.href}>
+              {item.name}
+            </Link>
+          ))}
         </li>
       )}
     </ul>

@@ -45,7 +45,11 @@ You can change credentials in your `.env` file if needed.
     ```bash
     npx prisma generate
     ```
-4. Populate the database (run to seed the database):
+4. Push schema to database:
+   ```bash
+   prisma db push
+   ```
+5. Populate the database (run to seed the database):
     ```bash
     npx prisma db seed
     ```

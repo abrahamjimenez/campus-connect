@@ -2,6 +2,7 @@ services:
 
   db:
     image: postgres
+    container_name: postgres
     restart: always
     shm_size: 128mb
     environment:
@@ -14,6 +15,7 @@ services:
 
   sonarqube:
     image: sonarqube
+    container_name: sonarqube
     restart: always
     environment:
       SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
@@ -24,14 +26,18 @@ services:
 
   sonar-scanner:
     image: sonarsource/sonar-scanner-cli
+    container_name: sonar-scanner
     environment:
       SONAR_HOST_URL: ${SONARQUBE_URL}
       SONAR_TOKEN: ${SONAR_TOKEN}
     volumes:
       - "${YOUR_REPO}:/usr/src"
+      - sonar-scanner_data:/var/lib/sonar-scanner/data
+      - sonar-scanner_cacerts:/tmp/cacerts
     network_mode: "host"
 
 volumes:
   db_data:
   sonarqube_data:
   sonar-scanner_data:
+  sonar-scanner_cacerts:
