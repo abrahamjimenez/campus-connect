@@ -11,7 +11,15 @@ import {
   UpdateUserState,
 } from "@/lib/user";
 import { setSessionCookie } from "@/lib/auth";
-import {CountrySchema, EmailSchema, FirstNameSchema, LastNameSchema, PasswordSchema, PhoneSchema, StateSchema} from "@/app/profile/validation";
+import {
+  CountrySchema,
+  EmailSchema,
+  FirstNameSchema,
+  LastNameSchema,
+  PasswordSchema,
+  PhoneSchema,
+  StateSchema,
+} from "@/app/profile/validation";
 
 export async function firstNameAction(formData: FormData) {
   const firstName = formData.get("firstName") as string;
@@ -20,10 +28,10 @@ export async function firstNameAction(formData: FormData) {
   await FindUser(userId);
   const data: any = await UpdateUserFirstName(userId, firstName);
 
-  const validationResult = FirstNameSchema.safeParse(data)
+  const validationResult = FirstNameSchema.safeParse(data);
 
   if (!validationResult.success) {
-    return {isError: true, message: validationResult.error.issues[0].message}
+    return { isError: true, message: validationResult.error.issues[0].message };
   }
 
   await setSessionCookie(data);
@@ -36,10 +44,10 @@ export async function lastNameAction(formData: FormData) {
   await FindUser(userId);
   const data: any = await UpdateUserLastName(userId, lastName);
 
-  const validationResult = LastNameSchema.safeParse(data)
+  const validationResult = LastNameSchema.safeParse(data);
 
   if (!validationResult.success) {
-    return {isError: true, message: validationResult.error.issues[0].message}
+    return { isError: true, message: validationResult.error.issues[0].message };
   }
 
   await setSessionCookie(data);
@@ -52,10 +60,10 @@ export async function emailAction(formData: FormData) {
   await FindUser(userId);
   const data: any = await UpdateUserEmail(userId, email);
 
-  const validationResult = EmailSchema.safeParse(data)
+  const validationResult = EmailSchema.safeParse(data);
 
   if (!validationResult.success) {
-    return {isError: true, message: validationResult.error.issues[0].message}
+    return { isError: true, message: validationResult.error.issues[0].message };
   }
 
   await setSessionCookie(data);
@@ -68,10 +76,10 @@ export async function countryAction(formData: FormData) {
   await FindUser(userId);
   const data: any = await UpdateUserCountry(userId, country);
 
-  const validationResult = CountrySchema.safeParse(data)
+  const validationResult = CountrySchema.safeParse(data);
 
   if (!validationResult.success) {
-    return {isError: true, message: validationResult.error.issues[0].message}
+    return { isError: true, message: validationResult.error.issues[0].message };
   }
 
   await setSessionCookie(data);
@@ -84,10 +92,10 @@ export async function stateAction(formData: FormData) {
   await FindUser(userId);
   const data: any = await UpdateUserState(userId, state);
 
-  const validationResult = StateSchema.safeParse(data)
+  const validationResult = StateSchema.safeParse(data);
 
   if (!validationResult.success) {
-    return {isError: true, message: validationResult.error.issues[0].message}
+    return { isError: true, message: validationResult.error.issues[0].message };
   }
 
   await setSessionCookie(data);
@@ -100,10 +108,10 @@ export async function phoneAction(formData: FormData) {
   await FindUser(userId);
   const data: any = await UpdateUserPhone(userId, phone);
 
-  const validationResult = PhoneSchema.safeParse(data)
+  const validationResult = PhoneSchema.safeParse(data);
 
   if (!validationResult.success) {
-    return {isError: true, message: validationResult.error.issues[0].message}
+    return { isError: true, message: validationResult.error.issues[0].message };
   }
 
   await setSessionCookie(data);
@@ -116,10 +124,10 @@ export async function passwordAction(formData: FormData) {
   await FindUser(userId);
   const data: any = await UpdateUserPassword(userId, password);
 
-  const validationResult = PasswordSchema.safeParse(data)
+  const validationResult = PasswordSchema.safeParse(data);
 
   if (!validationResult.success) {
-    return {isError: true, message: validationResult.error.issues[0].message}
+    return { isError: true, message: validationResult.error.issues[0].message };
   }
 
   await setSessionCookie(data);

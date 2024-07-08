@@ -3,7 +3,7 @@
 import { LoginUser } from "@/lib/user";
 import { setSessionCookie } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import {LoginSchema} from "@/app/login/validation";
+import { LoginSchema } from "@/app/login/validation";
 
 interface Data {
   email: string;
@@ -16,10 +16,10 @@ export async function loginAction(formData: FormData) {
     password: formData.get("password") as string,
   };
 
-  const validationResult = LoginSchema.safeParse(data)
+  const validationResult = LoginSchema.safeParse(data);
 
   if (!validationResult.success) {
-    return {isError: true, message: validationResult.error.issues[0].message}
+    return { isError: true, message: validationResult.error.issues[0].message };
   }
 
   const user = await LoginUser(data);

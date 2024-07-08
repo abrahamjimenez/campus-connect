@@ -1,6 +1,6 @@
 "use client";
 
-import React, {FormEvent, useState} from "react";
+import React, { FormEvent, useState } from "react";
 import {
   countryAction,
   emailAction,
@@ -21,7 +21,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const error = await firstNameAction(formData);
-    setErrorMessage(error?.message)
+    setErrorMessage(error?.message);
   };
 
   const handleLastNameSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -30,7 +30,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const error = await lastNameAction(formData);
-    setErrorMessage(error?.message)
+    setErrorMessage(error?.message);
   };
 
   const handleEmailSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -39,7 +39,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const error = await emailAction(formData);
-    setErrorMessage(error?.message)
+    setErrorMessage(error?.message);
   };
 
   const handleCountrySubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -48,7 +48,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const error = await countryAction(formData);
-    setErrorMessage(error?.message)
+    setErrorMessage(error?.message);
   };
 
   const handleStateSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -57,7 +57,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const error = await stateAction(formData);
-    setErrorMessage(error?.message)
+    setErrorMessage(error?.message);
   };
 
   const handlePhoneSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -66,7 +66,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const error = await phoneAction(formData);
-    setErrorMessage(error?.message)
+    setErrorMessage(error?.message);
   };
 
   const handlePasswordSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -75,7 +75,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const error = await passwordAction(formData);
-    setErrorMessage(error?.message)
+    setErrorMessage(error?.message);
   };
 
   return (
