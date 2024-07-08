@@ -17,6 +17,7 @@ import {
   bottomNavigation,
   jobs,
   navigation,
+  notLoggedIn,
 } from "@/components/Header/navigation";
 
 const DesktopMenu = ({ user }: { user: JWTPayload }) => {
@@ -94,8 +95,12 @@ const DesktopMenu = ({ user }: { user: JWTPayload }) => {
         <SignOutButton />
       ) : (
         <li className="flex flex-col">
-          {navigation.map((item) => (
-            <Link key={item.name} href={item.href}>
+          {notLoggedIn.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="text-black hover:bg-black hover:text-white rounded-md py-2 px-2 text-sm font-medium"
+            >
               {item.name}
             </Link>
           ))}

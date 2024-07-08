@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import {
   countryAction,
   emailAction,
@@ -13,13 +13,15 @@ import {
 import { JWTPayload } from "jose";
 
 const ProfileForm = ({ user }: { user: JWTPayload }) => {
+  const [errorMessage, setErrorMessage] = useState<string>();
+
   const handleFirstNameSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-
-    await firstNameAction(formData);
+    const error = await firstNameAction(formData);
+    setErrorMessage(error?.message);
   };
 
   const handleLastNameSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -27,8 +29,8 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-
-    await lastNameAction(formData);
+    const error = await lastNameAction(formData);
+    setErrorMessage(error?.message);
   };
 
   const handleEmailSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -36,8 +38,8 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-
-    await emailAction(formData);
+    const error = await emailAction(formData);
+    setErrorMessage(error?.message);
   };
 
   const handleCountrySubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -45,8 +47,8 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-
-    await countryAction(formData);
+    const error = await countryAction(formData);
+    setErrorMessage(error?.message);
   };
 
   const handleStateSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -54,8 +56,8 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-
-    await stateAction(formData);
+    const error = await stateAction(formData);
+    setErrorMessage(error?.message);
   };
 
   const handlePhoneSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -63,8 +65,8 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-
-    await phoneAction(formData);
+    const error = await phoneAction(formData);
+    setErrorMessage(error?.message);
   };
 
   const handlePasswordSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -72,13 +74,14 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-
-    await passwordAction(formData);
+    const error = await passwordAction(formData);
+    setErrorMessage(error?.message);
   };
 
   return (
     <div>
-      <form onSubmit={handleFirstNameSubmit}>
+      {errorMessage && <p className="text-red-600">{errorMessage}</p>}
+      <form onSubmit={handleFirstNameSubmit} noValidate>
         <label htmlFor="firstName">First Name: </label>
         <br />
         <input
@@ -96,7 +99,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form onSubmit={handleLastNameSubmit}>
+      <form onSubmit={handleLastNameSubmit} noValidate>
         <label htmlFor="lastName">Last Name: </label>
         <br />
         <input
@@ -114,7 +117,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form onSubmit={handleEmailSubmit}>
+      <form onSubmit={handleEmailSubmit} noValidate>
         <label htmlFor="email">Email: </label>
         <br />
         <input
@@ -132,7 +135,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form onSubmit={handlePasswordSubmit}>
+      <form onSubmit={handlePasswordSubmit} noValidate>
         <label htmlFor="password">Password: </label>
         <br />
         <input id="password" name="password" type="password" />
@@ -145,7 +148,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form onSubmit={handleCountrySubmit}>
+      <form onSubmit={handleCountrySubmit} noValidate>
         <label htmlFor="country">Country: </label>
         <br />
         <input
@@ -163,7 +166,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form onSubmit={handleStateSubmit}>
+      <form onSubmit={handleStateSubmit} noValidate>
         <label htmlFor="state">State: </label>
         <br />
         <input
@@ -181,7 +184,7 @@ const ProfileForm = ({ user }: { user: JWTPayload }) => {
         <button type="submit">Update</button>
       </form>
 
-      <form onSubmit={handlePhoneSubmit}>
+      <form onSubmit={handlePhoneSubmit} noValidate>
         <label htmlFor="phone">Phone: </label>
         <br />
         <input

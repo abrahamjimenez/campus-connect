@@ -3,6 +3,7 @@
 import { RegisterUser } from "@/lib/user";
 import { redirect } from "next/navigation";
 import { setSessionCookie } from "@/lib/auth";
+import { RegisterSchema } from "@/app/register/validation";
 
 export interface UserError {
   isError: boolean;
@@ -28,6 +29,12 @@ export async function registerAction(formData: FormData) {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
   };
+
+  const validationResult = RegisterSchema.safeParse(data);
+
+  if (!validationResult.success) {
+    return validationResult.error.issues[0].message;
+  }
 
   const user: UserError | RegisterUserInterface = await RegisterUser(data);
 
